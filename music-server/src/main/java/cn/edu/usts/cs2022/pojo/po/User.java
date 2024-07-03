@@ -22,5 +22,5 @@ public class User {
 
     private Date updateTime;
 
-    private String avator;
+    private String avatar;
 }

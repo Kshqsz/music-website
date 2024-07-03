@@ -2,15 +2,15 @@
   <div id = "home">
     <el-container>
       <el-header>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" router>
             <el-menu-item> 
-                <i class="el-icon-service"></i> 
-                <span style="color: #000; font-size: large;">Music</span>
+                <i class="el-icon-headset"></i> 
+                <span style="color: #000; font-size: large;">Spoon-music</span>
             </el-menu-item>
 
-            <el-menu-item index="/homepage">首页</el-menu-item>
-            <el-menu-item index="2">歌单</el-menu-item>
-            <el-menu-item index="3">歌手</el-menu-item>
+            <el-menu-item index="/homePage">首页</el-menu-item>
+            <el-menu-item index="/song">歌曲</el-menu-item>
+            <el-menu-item index="/singer">歌手</el-menu-item>
             <el-menu-item>
                 <el-input 
                     v-model="message"
@@ -22,16 +22,19 @@
             </el-menu-item>
 
             <!-- 用于占位的菜单项 -->
-            <el-menu-item class="flex-spacer" disabled></el-menu-item>
+            <span class="flex-spacer"></span>
 
-            <el-menu-item index="/login" class="right-menu-item">登录</el-menu-item>
-            <el-menu-item index="/register" class="right-menu-item">注册</el-menu-item>
+            <el-menu-item index="/login">登录</el-menu-item>
+            <el-menu-item index="/register">注册</el-menu-item>
         </el-menu>
 
       </el-header>
       <el-main>
         <router-view></router-view>
       </el-main>
+      <el-footer>
+        <span class="copyright">© Copyright 2024 Created By Han Shoukun and Wu Yuhuai </span>
+      </el-footer>
     </el-container>
   </div>
 </template>
@@ -52,6 +55,13 @@ export default {
 </script>
 
 <style>
+.copyright {
+  position: relative;
+  top: 50%;
+  width: 500px;
+  height: 27px;
+  margin-left: calc(50% - 245px);
+}
 .el-menu-demo {
     display: flex;
     align-items: center;
@@ -59,9 +69,5 @@ export default {
 
 .flex-spacer {
     flex: 1;
-}
-
-.right-menu-item {
-    margin-left: auto;
 }
 </style>
