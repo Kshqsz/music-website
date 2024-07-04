@@ -1,19 +1,19 @@
 <template>
   <div>
     <div>
-      <el-carousel :interval="3000" type="card" height="450px" width="">
+      <el-carousel :interval="3000" type="card" height="400px" width="">
         <el-carousel-item v-for="item in imageList" :key="item.id">
             <img :src="item.url" alt="" class="image">
         </el-carousel-item>
       </el-carousel>
     </div>
     <h2>推荐歌手</h2>
-    <div class="avatar-row">
+    <div class="avatar-row1">
       <div v-for="item in songList" :key="item.id">
-        <el-avatar :size="309" :shape="'circle'">
+        <el-avatar :size="213" :shape="'round'">
           <img :src="item.url"/>
         </el-avatar>
-        <div class="avatar-text">{{ item.name }}</div>
+        <div class="avatar-text1">{{ item.name }}</div>
       </div>
     </div>
     <h2>推荐歌曲</h2>
@@ -37,6 +37,8 @@ export default {
               {id: 2, url: require("@/assets/wlh.jpg"), name: "王力宏"},
               {id: 3, url: require("@/assets/tz.jpg"), name: "陶喆"},
               {id: 4, url: require("@/assets/dzq.jpg"), name: "邓紫棋"},
+              {id: 5, url: require("@/assets/zl.jpg"), name: "赵雷"},
+              {id: 6, url: require("@/assets/cyx.jpg"), name: "陈奕迅"},
             ]
         }
     }
@@ -44,17 +46,17 @@ export default {
 </script>
 
 <style>
-.avatar-text {
+.avatar-text1 {
   padding-top: 10px;
-  padding-left:150px;
+  padding-left: 75px;
   padding-bottom: 30px;
-  font-size: 18px;
+  font-size: 15px;
   color: #333;
 }
-.avatar-row {
+.avatar-row1 {
   display: flex;
   flex-wrap: wrap; /* 如果头像过多，可以换行 */
-  gap: 15px; /* 控制每个头像之间的间距 */
+  gap: 22px; /* 控制每个头像之间的间距 */
 }
 .image {
     object-fit: fill;
