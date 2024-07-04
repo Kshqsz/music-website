@@ -6,6 +6,7 @@ import RegisterView from '@/views/RegisterView.vue'
 import SongView from '@/views/SongView.vue'
 import HomePageView from '@/views/HomePageView.vue'
 import SingerView from '@/views/SingerView.vue'
+import SingerDetail from '@/components/SingerDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,7 @@ const routes = [
       { path: '/song', name: 'song', component: SongView },
       { path: '/singer', name: 'singer', component: SingerView },
       { path: '/homePage', name: 'homePage', component: HomePageView },
+      { path: '/singer-detail/:id', name:"singer-detail", component: SingerDetail}
     ]
   },
   {

@@ -7,17 +7,17 @@ const store =  new Vuex.Store({
   state: {
     isPlay: false,
     url: '',
-    id: ''
+    id: '',
   },
   getters: {
     isPlay: state => state.isPlay,
     url: state => state.url,
-    id: state => state.id
+    id: state => state.id,
   },
   mutations: {
     setIsPlay: (state, isPlay) => {state.isPlay = isPlay},
     setUrl: (state, url) => {state.url = url;},
-    setId: (state, id) => {state.id = id}
+    setId: (state, id) => {state.id = id},
   },
 })
 
