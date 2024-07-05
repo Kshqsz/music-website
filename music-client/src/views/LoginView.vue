@@ -15,7 +15,7 @@
         </el-form-item>
       </el-form>
     </el-card>
-    <img src="../assets/guitar.jpg" alt="" class="background-image">
+    <img src="../assets/img/guitar.jpg" alt="" class="background-image">
   </div>
 </template>
 

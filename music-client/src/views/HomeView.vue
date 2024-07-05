@@ -4,7 +4,8 @@
       <el-header>
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" router>
             <el-menu-item> 
-                <i class="el-icon-headset"></i> 
+                <i class="el-icon-headset" style="font-size: 30px;"></i> 
+                &nbsp;
                 <span style="color: #000; font-size: large;">Spoon-music</span>
             </el-menu-item>
 

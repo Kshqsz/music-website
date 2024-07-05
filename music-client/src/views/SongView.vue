@@ -4,7 +4,6 @@
     <el-card class="song-card">
       <el-table
         :data="songList"
-        stripe
         style="width: 100%">
         <el-table-column prop="id" width="300">
           <template slot-scope="scope">
@@ -22,11 +21,11 @@
         </el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-            <CaretRightOutlined style="font-size: 25px;" @click="play(scope.row.id, scope.row.url)" v-if="!scope.row.isPlay"></CaretRightOutlined> 
-            <PauseOutlined style="font-size: 25px;" @click="play(scope.row.id, scope.row.url)" v-else></PauseOutlined> 
+            <CaretRightOutlined style="font-size: 25px;" @click="play(scope.row.id, scope.row.url, scope.row.pic, scope.row.name, scope.row.singer)" v-if="!scope.row.isPlay"></CaretRightOutlined> 
+            <PauseOutlined style="font-size: 25px;" @click="play(scope.row.id, scope.row.url, scope.row.pic, scope.row.name, scope.row.singer)" v-else></PauseOutlined> 
               &nbsp;&nbsp;&nbsp;&nbsp;
             <HeartOutlined style="font-size: 25px;" @click="star(scope.row.id)" v-if="!scope.row.isStar"></HeartOutlined> 
-            <HeartFilled style="font-size: 25px;" @click="star(scope.row.id)" v-else></HeartFilled> 
+            <HeartFilled style="font-size: 25px;" @click="star(scope.row.id)" v-else></HeartFilled>
           </template>
         </el-table-column>
       </el-table>
@@ -46,22 +45,25 @@ export default {
   },
   computed: {
       ...mapGetters([
-          'isPlay'
+          'isPlay',
       ])
   },
   data() {
     return {
       songList: [
-        { id: 0, url: "http://localhost:8080/song/一路向北.mp3", name: "一路向北", singer: "周杰伦", isPlay: false, isStar: false},
-        { id: 1, url: "http://localhost:8080/song/七里香.mp3", name: "七里香", singer: "周杰伦", isPlay: false, isStar: false},
-        { id: 2, url: "http://localhost:8080/song/晴天.mp3", name: "晴天", singer: "周杰伦", isPlay: false, isStar: false},
+        { id: 0, url: "http://localhost:8080/song/一路向北.mp3", name: "一路向北", singer: "周杰伦", isPlay: false, isStar: false, pic: "http://localhost:8080/img/一路向北.jpg"},
+        { id: 1, url: "http://localhost:8080/song/七里香.mp3", name: "七里香", singer: "周杰伦", isPlay: false, isStar: false, pic: "http://localhost:8080/img/七里香.jpg"},
+        { id: 2, url: "http://localhost:8080/song/晴天.mp3", name: "晴天", singer: "周杰伦", isPlay: false, isStar: false, pic: "http://localhost:8080/img/晴天.jpg"},
       ],
     }
   },
   methods: {
-    play(id, url) {
+    play(id, url, pic, title, artist) {
       this.songList[id].isPlay = !this.songList[id].isPlay;
       this.$store.commit('setUrl', url);
+      this.$store.commit('setPicUrl', pic);
+      this.$store.commit('setTitle', title);
+      this.$store.commit('setArtist', artist);
       if (this.isPlay) {
         this.$store.commit('setIsPlay', false);
       } else {
@@ -71,7 +73,7 @@ export default {
     star(id) {
       this.songList[id].isStar = !this.songList[id].isStar
     }
-  }
+  },
 }
 </script>
 

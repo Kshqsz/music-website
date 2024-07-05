@@ -25,5 +25,4 @@ public class Singer {
     private String location;
 
     private String introduction;
-
 }

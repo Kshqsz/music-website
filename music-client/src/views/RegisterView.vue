@@ -18,7 +18,7 @@
         </el-form-item>
       </el-form>
     </el-card>
-    <img src="../assets/jg.jpg" alt="" class="background-image">
+    <img src="../assets/img/jg.jpg" alt="" class="background-image">
   </div>
 </template>
 

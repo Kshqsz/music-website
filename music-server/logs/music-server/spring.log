@@ -1,52 +1,26 @@
-16:06:36:192  INFO 3884 --- [main] c.e.usts.cs2022.MusicServerApplication   : Starting MusicServerApplication using Java 11.0.6 on hsk with PID 3884 (E:\GitHub\music-website\music-server\target\classes started by 24564 in E:\GitHub\music-website\music-server)
-16:06:36:200  INFO 3884 --- [main] c.e.usts.cs2022.MusicServerApplication   : No active profile set, falling back to 1 default profile: "default"
-16:06:36:810  WARN 3884 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[cn.edu.usts.cs2022]' package. Please check your configuration.
-16:06:37:143  INFO 3884 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-16:06:37:151  INFO 3884 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-16:06:37:151  INFO 3884 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
-16:06:37:244  INFO 3884 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-16:06:37:244  INFO 3884 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 982 ms
-16:06:37:622  INFO 3884 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-16:06:37:631  INFO 3884 --- [main] c.e.usts.cs2022.MusicServerApplication   : Started MusicServerApplication in 1.816 seconds (JVM running for 3.318)
-16:06:38:643  INFO 3884 --- [http-nio-8080-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-16:06:38:644  INFO 3884 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-16:06:38:645  INFO 3884 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-16:07:10:600  INFO 33268 --- [main] c.e.usts.cs2022.MusicServerApplication   : Starting MusicServerApplication using Java 11.0.6 on hsk with PID 33268 (E:\GitHub\music-website\music-server\target\classes started by 24564 in E:\GitHub\music-website\music-server)
-16:07:10:603  INFO 33268 --- [main] c.e.usts.cs2022.MusicServerApplication   : No active profile set, falling back to 1 default profile: "default"
-16:07:11:042  WARN 33268 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[cn.edu.usts.cs2022]' package. Please check your configuration.
-16:07:11:316  INFO 33268 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-16:07:11:323  INFO 33268 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-16:07:11:323  INFO 33268 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
-16:07:11:401  INFO 33268 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-16:07:11:401  INFO 33268 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 769 ms
-16:07:11:779  INFO 33268 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-16:07:11:789  INFO 33268 --- [main] c.e.usts.cs2022.MusicServerApplication   : Started MusicServerApplication in 1.517 seconds (JVM running for 2.845)
-16:07:28:234  INFO 33268 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-16:07:28:235  INFO 33268 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-16:07:28:236  INFO 33268 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-16:53:45:847  INFO 26256 --- [main] c.e.usts.cs2022.MusicServerApplication   : Starting MusicServerApplication using Java 11.0.6 on hsk with PID 26256 (E:\GitHub\music-website\music-server\target\classes started by 24564 in E:\GitHub\music-website\music-server)
-16:53:45:849  INFO 26256 --- [main] c.e.usts.cs2022.MusicServerApplication   : No active profile set, falling back to 1 default profile: "default"
-16:53:46:238  WARN 26256 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[cn.edu.usts.cs2022]' package. Please check your configuration.
-16:53:46:499  INFO 26256 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-16:53:46:505  INFO 26256 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-16:53:46:505  INFO 26256 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
-16:53:46:593  INFO 26256 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-16:53:46:593  INFO 26256 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 714 ms
-16:53:46:910  INFO 26256 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-16:53:46:918  INFO 26256 --- [main] c.e.usts.cs2022.MusicServerApplication   : Started MusicServerApplication in 1.369 seconds (JVM running for 2.586)
-16:54:01:062  INFO 26256 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-16:54:01:062  INFO 26256 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-16:54:01:062  INFO 26256 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-17:04:25:225  INFO 17436 --- [main] c.e.usts.cs2022.MusicServerApplication   : Starting MusicServerApplication using Java 11.0.6 on hsk with PID 17436 (E:\GitHub\music-website\music-server\target\classes started by 24564 in E:\GitHub\music-website\music-server)
-17:04:25:227  INFO 17436 --- [main] c.e.usts.cs2022.MusicServerApplication   : No active profile set, falling back to 1 default profile: "default"
-17:04:25:623  WARN 17436 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[cn.edu.usts.cs2022]' package. Please check your configuration.
-17:04:25:918  INFO 17436 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-17:04:25:926  INFO 17436 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-17:04:25:926  INFO 17436 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
-17:04:26:013  INFO 17436 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-17:04:26:014  INFO 17436 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 760 ms
-17:04:26:345  INFO 17436 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-17:04:26:354  INFO 17436 --- [main] c.e.usts.cs2022.MusicServerApplication   : Started MusicServerApplication in 1.434 seconds (JVM running for 2.639)
-17:04:50:102  INFO 17436 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-17:04:50:103  INFO 17436 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-17:04:50:104  INFO 17436 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+13:10:57:295  INFO 21196 --- [main] c.e.usts.cs2022.MusicServerApplication   : Starting MusicServerApplication using Java 11.0.6 on hsk with PID 21196 (E:\GitHub\music-website\music-server\target\classes started by 24564 in E:\GitHub\music-website\music-server)
+13:10:57:299  INFO 21196 --- [main] c.e.usts.cs2022.MusicServerApplication   : No active profile set, falling back to 1 default profile: "default"
+13:10:57:724  WARN 21196 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[cn.edu.usts.cs2022]' package. Please check your configuration.
+13:10:58:014  INFO 21196 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+13:10:58:020  INFO 21196 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+13:10:58:020  INFO 21196 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+13:10:58:105  INFO 21196 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+13:10:58:105  INFO 21196 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 772 ms
+13:10:58:460  INFO 21196 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+13:10:58:469  INFO 21196 --- [main] c.e.usts.cs2022.MusicServerApplication   : Started MusicServerApplication in 1.499 seconds (JVM running for 2.716)
+13:31:54:789  INFO 21196 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+13:31:54:789  INFO 21196 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+13:31:54:789  INFO 21196 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+14:57:23:558  INFO 27912 --- [main] c.e.usts.cs2022.MusicServerApplication   : Starting MusicServerApplication using Java 11.0.6 on hsk with PID 27912 (E:\GitHub\music-website\music-server\target\classes started by 24564 in E:\GitHub\music-website\music-server)
+14:57:23:560  INFO 27912 --- [main] c.e.usts.cs2022.MusicServerApplication   : No active profile set, falling back to 1 default profile: "default"
+14:57:24:034  WARN 27912 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[cn.edu.usts.cs2022]' package. Please check your configuration.
+14:57:24:438  INFO 27912 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+14:57:24:451  INFO 27912 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+14:57:24:451  INFO 27912 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+14:57:24:556  INFO 27912 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+14:57:24:556  INFO 27912 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 967 ms
+14:57:24:918  INFO 27912 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+14:57:24:928  INFO 27912 --- [main] c.e.usts.cs2022.MusicServerApplication   : Started MusicServerApplication in 1.714 seconds (JVM running for 2.973)
+14:57:30:721  INFO 27912 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+14:57:30:721  INFO 27912 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+14:57:30:721  INFO 27912 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
