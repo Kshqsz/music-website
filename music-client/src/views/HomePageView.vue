@@ -11,7 +11,7 @@
     <div class="avatar-row1">
       <div v-for="item in singerList" :key="item.id">
         <el-avatar :size="213" :shape="'round'">
-          <img :src="item.url" @click=goDetail(item.id) />
+          <img :src="item.url" @click=goDetail(item.id) style="cursor: pointer;"/>
         </el-avatar>
         <div class="avatar-text1">{{ item.name }}</div>
       </div>

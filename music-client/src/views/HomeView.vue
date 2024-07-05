@@ -2,7 +2,7 @@
   <div id = "home">
     <el-container>
       <el-header>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" router>
+        <el-menu :default-active="this.activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" router>
             <el-menu-item> 
                 <i class="el-icon-headset" style="font-size: 30px;"></i> 
                 &nbsp;
@@ -25,8 +25,20 @@
             <!-- 用于占位的菜单项 -->
             <span class="flex-spacer"></span>
 
-            <el-menu-item index="/login">登录</el-menu-item>
-            <el-menu-item index="/register">注册</el-menu-item>
+            <el-menu-item index="/login" v-if="!this.isLogin">登录</el-menu-item>
+            <el-menu-item index="/register" v-if="!this.isLogin">注册</el-menu-item>
+            <el-dropdown v-if="this.isLogin">
+              <span class="el-dropdown-link">
+                <el-avatar :size="55"/>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>个人信息</el-dropdown-item>
+                <el-dropdown-item>我的收藏</el-dropdown-item>
+                <el-dropdown-item>
+                  <span @click="exit()">退出</span>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
         </el-menu>
 
       </el-header>
@@ -41,7 +53,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
+    computed: {
+      ...mapGetters([
+        "activeIndex",
+        "isLogin"
+      ])
+    },
     data() {
       return {
           message: '',
@@ -50,6 +69,9 @@ export default {
     methods: {
         search() {
             this.$message.success("开始搜索");
+        },
+        exit() {
+          this.$store.commit("setIsLogin", false);
         }
     }
 }
@@ -71,4 +93,8 @@ export default {
 .flex-spacer {
     flex: 1;
 }
+.el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
 </style>

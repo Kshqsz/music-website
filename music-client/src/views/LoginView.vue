@@ -5,13 +5,30 @@
       <br>
       <el-form label-width="30px" router>
         <el-form-item  prop="username">
-            <el-input prefix-icon="el-icon-user" placeholder = "用户名" @keyup.enter.native="login" style="width: 400px;"></el-input>
+            <el-input 
+              prefix-icon="el-icon-user" 
+              placeholder = "用户名" 
+              style="width: 400px;" 
+              v-model="loginForm.username">
+            </el-input>
         </el-form-item>
         <el-form-item  prop="password">
-            <el-input prefix-icon="el-icon-lock" type = "password" placeholder = "密码" @keyup.enter.native="login" style="width: 400px;"></el-input>
+            <el-input 
+              prefix-icon="el-icon-lock" 
+              type = "password" 
+              placeholder = "密码" 
+              @keyup.enter.native="login" 
+              style="width: 400px;" 
+              v-model="loginForm.password">
+            </el-input>
         </el-form-item>
         <el-form-item style="padding-left:50px;">
-            <el-button type = "primary" @click = "login" style="width: 300px;">登录</el-button>
+            <el-button 
+              type = "primary" 
+              @click = "login()" 
+              style="width: 300px;"
+              >登录
+            </el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -20,10 +37,28 @@
 </template>
 
 <script>
+import axios from '@/utils/axios'
 export default {
+  data() {
+    return {
+      loginForm: {
+        username: '',
+        password: ''
+      }
+    }
+  },
   methods: {
-    toRegister() {
-      this.$router.push("/register")
+    login() {
+      axios.post("/user/login", this.loginForm).then(res => {
+        if (res.data.code === 0) {
+          this.$store.commit("setActiveIndex", '/homePage');
+          this.$store.commit("setIsLogin", true);
+          this.$router.push('/homePage');
+          this.$message.success("登录成功~ 欢迎你 " + this.loginForm.username + "~");
+        } else {
+          this.$message.error("用户名或密码错误");
+        }
+      })
     }
   }
 }

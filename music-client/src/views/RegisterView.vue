@@ -5,16 +5,38 @@
       <br>
       <el-form label-width="30px" router>
         <el-form-item  prop="username">
-            <el-input prefix-icon="el-icon-user" placeholder = "用户名" @keyup.enter.native="login" style="width: 400px;"></el-input>
+            <el-input 
+              prefix-icon="el-icon-user" 
+              placeholder = "用户名" 
+              style="width: 400px;"
+              v-model="registerForm.username"
+              ></el-input>
         </el-form-item>
         <el-form-item  prop="password">
-            <el-input prefix-icon="el-icon-lock" type = "password" placeholder = "密码" @keyup.enter.native="login" style="width: 400px;"></el-input>
+            <el-input 
+              prefix-icon="el-icon-lock" 
+              type = "password" 
+              placeholder = "密码" 
+              style="width: 400px;"
+              v-model="registerForm.password"
+              ></el-input>
         </el-form-item>
         <el-form-item  prop="password">
-            <el-input prefix-icon="el-icon-lock" type = "password" placeholder = "确认密码" @keyup.enter.native="login" style="width: 400px;"></el-input>
+            <el-input 
+              prefix-icon="el-icon-lock" 
+              type = "password" 
+              placeholder = "确认密码" 
+              @keyup.enter.native="register()" 
+              style="width: 400px;"
+              v-model="registerForm.rePassword">
+            </el-input>
         </el-form-item>
         <el-form-item style="padding-left:50px;">
-            <el-button  @click = "register()" style="width: 300px;">注册</el-button>
+            <el-button  
+              @click = "register()" 
+              style="width: 300px;">
+              注册
+          </el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -23,8 +45,29 @@
 </template>
 
 <script>
+import axios from '@/utils/axios'
 export default {
+  data() {
+    return {
+      registerForm: {
+        username: '',
+        password: '',
+        rePassword: '',
+      }
+    }
+  },
   methods: {
+    register() {
+      axios.post("/user/register", this.registerForm).then(res => {
+        if (res.data.code === 0) {
+          this.$message.success("注册成功~");
+          this.$router.push("/login");
+          this.$store.commit("setActiveIndex", '/login');
+        } else {
+          this.$message.error(res.data.data);
+        }
+      })
+    }
   }
 }
 </script>
