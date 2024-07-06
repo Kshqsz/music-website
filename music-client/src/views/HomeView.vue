@@ -14,7 +14,7 @@
             <el-menu-item index="/singer">歌手</el-menu-item>
             <el-menu-item>
                 <el-input 
-                    v-model="message"
+                    v-model="keyword"
                     prefix-icon="el-icon-search" 
                     placeholder="搜索" 
                     style="width: 300px;" 
@@ -40,7 +40,6 @@
               </el-dropdown-menu>
             </el-dropdown>
         </el-menu>
-
       </el-header>
       <el-main>
         <router-view></router-view>
@@ -53,27 +52,40 @@
 </template>
 
 <script>
+import axios from '@/utils/axios'
 import { mapGetters } from 'vuex';
 export default {
-    computed: {
-      ...mapGetters([
-        "activeIndex",
-        "isLogin"
-      ])
-    },
-    data() {
-      return {
-          message: '',
-      }
-    },
-    methods: {
-        search() {
-            this.$message.success("开始搜索");
-        },
-        exit() {
-          this.$store.commit("setIsLogin", false);
-        }
+  computed: {
+    ...mapGetters([
+      "activeIndex",
+      "isLogin",
+      "searchSongList"
+    ])
+  },
+  data() {
+    return {
+        keyword: ''
     }
+  },
+  methods: {
+      search() {
+          axios.get("/song/search", {
+            params: {
+              keyword: this.keyword
+            }
+          }).then(res => {
+            if (res.data.code === 0) {
+              this.$store.commit('setSearchSongList', res.data.data.songList);
+              this.$router.push("/searchResult");
+            } else {
+              this.$message.error("服务错误");
+            }
+          })
+      },
+      exit() {
+        this.$store.commit("setIsLogin", false);
+      }
+  }
 }
 </script>
 

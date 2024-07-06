@@ -18,8 +18,10 @@ const song = {
         currentPlayList: [], // 当前播放列表
         songDetails: null, // 单个歌单信息
         currentPlayIndex: -1, // 当前歌曲在歌曲列表的位置
+        searchSongList: []
     },
     getters: {
+        searchSongList: state => state.searchSongList,
         title: state => state.title,
         artist: state => state.artist,
         picUrl: state => state.picUrl,
@@ -40,7 +42,8 @@ const song = {
         currentPlayIndex: (state) => state.currentPlayIndex,
     },
     mutations: {
-
+        setSearchSongList: (state, searchSongList) => {state.searchSongList = searchSongList},
+        
         setTitle: (state, title) => {state.title = title},
 
         setPicUrl: (state, picUrl) => {state.picUrl = picUrl},
