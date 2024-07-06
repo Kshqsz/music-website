@@ -6,7 +6,6 @@ import cn.edu.usts.cs2022.pojo.po.Result;
 import cn.edu.usts.cs2022.pojo.po.User;
 import cn.edu.usts.cs2022.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,5 +57,7 @@ public class UserController {
         userService.register(username, password);
         return Result.success();
     }
+
+
 
 }

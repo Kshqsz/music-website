@@ -13,7 +13,7 @@ public class Song {
 
     private Integer id;
 
-    private Integer singerId;
+    private String singerName;
 
     private String name;
 
@@ -24,8 +24,6 @@ public class Song {
     private Date updateTime;
 
     private String pic;
-
-    private String lyric;
 
     private String url;
 }
