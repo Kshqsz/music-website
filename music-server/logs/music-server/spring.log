@@ -326,22 +326,6 @@ java.sql.SQLException: Field 'create_time' doesn't have a default value
 00:24:04:894  INFO 26952 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
 00:56:47:996  INFO 26952 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 00:56:48:012  INFO 26952 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-<<<<<<< HEAD
-14:42:44:008  INFO 1720 --- [main] c.e.usts.cs2022.MusicServerApplication   : Starting MusicServerApplication using Java 17.0.8.1 on Wu with PID 1720 (D:\develop\maven\music-website\music-server\target\classes started by 86157 in D:\develop\maven\music-website\music-server)
-14:42:44:010  INFO 1720 --- [main] c.e.usts.cs2022.MusicServerApplication   : No active profile set, falling back to 1 default profile: "default"
-14:42:44:566  INFO 1720 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-14:42:44:572  INFO 1720 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-14:42:44:572  INFO 1720 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
-14:42:44:650  INFO 1720 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-14:42:44:650  INFO 1720 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 610 ms
-14:42:45:041  INFO 1720 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-14:42:45:047  INFO 1720 --- [main] c.e.usts.cs2022.MusicServerApplication   : Started MusicServerApplication in 1.294 seconds (JVM running for 1.824)
-14:43:39:959  INFO 1720 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-14:43:39:960  INFO 1720 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-14:43:39:960  INFO 1720 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-14:43:40:047  INFO 1720 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-14:43:40:377  INFO 1720 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-=======
 13:30:48:597  INFO 16124 --- [main] c.e.usts.cs2022.MusicServerApplication   : Starting MusicServerApplication using Java 11.0.6 on hsk with PID 16124 (E:\GitHub\music-website\music-server\target\classes started by 24564 in E:\GitHub\music-website\music-server)
 13:30:48:599  INFO 16124 --- [main] c.e.usts.cs2022.MusicServerApplication   : No active profile set, falling back to 1 default profile: "default"
 13:30:49:377  INFO 16124 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
@@ -1321,4 +1305,19 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 16:28:04:613  INFO 26964 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
 16:28:53:597  INFO 26964 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 16:28:53:610  INFO 26964 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
->>>>>>> e2484d075ab92c8eb6c49421a93acdc37135dff8
+17:16:24:665  INFO 21248 --- [main] c.e.usts.cs2022.MusicServerApplication   : Starting MusicServerApplication using Java 11.0.6 on hsk with PID 21248 (E:\GitHub\music-website\music-server\target\classes started by 24564 in E:\GitHub\music-website\music-server)
+17:16:24:667  INFO 21248 --- [main] c.e.usts.cs2022.MusicServerApplication   : No active profile set, falling back to 1 default profile: "default"
+17:16:25:415  INFO 21248 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+17:16:25:422  INFO 21248 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+17:16:25:423  INFO 21248 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+17:16:25:517  INFO 21248 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+17:16:25:518  INFO 21248 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 818 ms
+17:16:26:007  INFO 21248 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+17:16:26:015  INFO 21248 --- [main] c.e.usts.cs2022.MusicServerApplication   : Started MusicServerApplication in 1.675 seconds (JVM running for 3.108)
+17:16:56:454  INFO 21248 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:16:56:464  INFO 21248 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+17:16:56:465  INFO 21248 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+17:16:56:515  INFO 21248 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+17:16:56:804  INFO 21248 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+17:59:39:038  INFO 21248 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+17:59:39:058  INFO 21248 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -15,22 +14,4 @@
             </if>
         </where>
     </select>
-=======
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="cn.edu.usts.cs2022.mapper.SongMapper">
-
-    <select id="searchBySong" resultType="cn.edu.usts.cs2022.pojo.po.Song">
-        select * from song
-        <where>
-            <if test="keyword != null">
-                 and (name like concat('%', #{keyword}, '%'))
-                 or (singer_name like concat('%', #{keyword}, '%'))
-            </if>
-        </where>
-    </select>
->>>>>>> e2484d075ab92c8eb6c49421a93acdc37135dff8
 </mapper>
