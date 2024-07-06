@@ -47,6 +47,7 @@ public class UserController {
         String username = registerDTO.getUsername();
         String password = registerDTO.getPassword();
         String rePassword = registerDTO.getRePassword();
+
         if (!password.equals(rePassword)) {
             return Result.error("两次密码输入不一致!");
         }
