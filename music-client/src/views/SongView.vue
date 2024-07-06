@@ -21,8 +21,8 @@
         </el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-            <CaretRightOutlined style="font-size: 25px;" @click="play(scope.row.id, scope.row.url, scope.row.pic, scope.row.name, scope.row.singer)" v-if="!scope.row.isPlay"></CaretRightOutlined> 
-            <PauseOutlined style="font-size: 25px;" @click="play(scope.row.id, scope.row.url, scope.row.pic, scope.row.name, scope.row.singer)" v-else></PauseOutlined> 
+            <CaretRightOutlined style="font-size: 25px;" @click="play(scope.row.url, scope.row.pic, scope.row.name, scope.row.singerName)" v-if="(!isPlay || (isPlay && title !== scope.row.name))"></CaretRightOutlined> 
+            <PauseOutlined style="font-size: 25px;" @click="play(scope.row.url, scope.row.pic, scope.row.name, scope.row.singerName)" v-if="(isPlay && title === scope.row.name)"></PauseOutlined> 
               &nbsp;&nbsp;&nbsp;&nbsp;
             <HeartOutlined style="font-size: 25px;" @click="star(scope.row.id)" v-if="!scope.row.isStar"></HeartOutlined> 
             <HeartFilled style="font-size: 25px;" @click="star(scope.row.id)" v-else></HeartFilled>
@@ -36,6 +36,7 @@
 <script>
 import {CaretRightOutlined, HeartOutlined, PauseOutlined, HeartFilled} from "@ant-design/icons-vue"
 import { mapGetters } from "vuex"
+import axios from "../utils/axios"
 export default {
   components: {
     CaretRightOutlined,
@@ -46,20 +47,26 @@ export default {
   computed: {
       ...mapGetters([
           'isPlay',
+          'title'
       ])
   },
   data() {
     return {
-      songList: [
-        { id: 0, url: "http://localhost:8080/song/一路向北.mp3", name: "一路向北", singer: "周杰伦", isPlay: false, isStar: false, pic: "http://localhost:8080/img/一路向北.jpg"},
-        { id: 1, url: "http://localhost:8080/song/七里香.mp3", name: "七里香", singer: "周杰伦", isPlay: false, isStar: false, pic: "http://localhost:8080/img/七里香.jpg"},
-        { id: 2, url: "http://localhost:8080/song/晴天.mp3", name: "晴天", singer: "周杰伦", isPlay: false, isStar: false, pic: "http://localhost:8080/img/晴天.jpg"},
-      ],
+      songList: [],
     }
   },
   methods: {
-    play(id, url, pic, title, artist) {
-      this.songList[id].isPlay = !this.songList[id].isPlay;
+    async listSong() {
+        await axios.get("/song/list").then(res => {
+          if (res.data.code === 0) {
+            this.songList = res.data.data;
+            this.songList.slice(0, 5);
+          } else {
+            this.$message.error("服务错误");
+          }
+        })
+      },
+    play(url, pic, title, artist) {
       this.$store.commit('setUrl', url);
       this.$store.commit('setPicUrl', pic);
       this.$store.commit('setTitle', title);
@@ -74,6 +81,9 @@ export default {
       this.songList[id].isStar = !this.songList[id].isStar
     }
   },
+  created() {
+    this.listSong();
+  }
 }
 </script>
 

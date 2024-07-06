@@ -18,9 +18,9 @@ public class Singer {
 
     private Integer sex;
 
-    private String pic;
+    private Date birth;
 
-    private Date brith;
+    private String pic;
 
     private String location;
 

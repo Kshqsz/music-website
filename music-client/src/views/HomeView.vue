@@ -25,8 +25,8 @@
             <!-- 用于占位的菜单项 -->
             <span class="flex-spacer"></span>
 
-            <el-menu-item index="/login" v-if="!this.isLogin">登录</el-menu-item>
-            <el-menu-item index="/register" v-if="!this.isLogin">注册</el-menu-item>
+            <el-menu-item index="/login" v-show="!this.isLogin">登录</el-menu-item>
+            <el-menu-item index="/register" v-show="!this.isLogin">注册</el-menu-item>
             <el-dropdown v-if="this.isLogin">
               <span class="el-dropdown-link">
                 <el-avatar :size="55"/>
@@ -76,6 +76,7 @@ export default {
           }).then(res => {
             if (res.data.code === 0) {
               this.$store.commit('setSearchSongList', res.data.data.songList);
+              this.$store.commit('setSearchSingerList', res.data.data.singerList);
               this.$router.push("/searchResult");
             } else {
               this.$message.error("服务错误");
@@ -84,6 +85,8 @@ export default {
       },
       exit() {
         this.$store.commit("setIsLogin", false);
+        this.$store.commit("setActiveIndex", "/login");
+        this.$router.push("/login");
       }
   }
 }

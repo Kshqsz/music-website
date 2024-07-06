@@ -7,11 +7,8 @@ import cn.edu.usts.cs2022.pojo.po.Song;
 import cn.edu.usts.cs2022.service.SingerService;
 import cn.edu.usts.cs2022.service.SongService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.naming.directory.SearchResult;
 import java.util.List;
 
 @RestController
@@ -31,4 +28,17 @@ public class SongController {
         searchDTO.setSingerList(singerList);
         return Result.success(searchDTO);
     }
+
+    @GetMapping("/getBySingerId/{singerId}")
+    public Result<List<Song>> getBySingerId(@PathVariable Integer singerId) {
+        List<Song> songList = songService.getBySingerId(singerId);
+        return Result.success(songList);
+    }
+
+    @GetMapping("/list")
+    public Result<List<Song>> list() {
+        List<Song> songList = songService.list();
+        return Result.success(songList);
+    }
+
 }

@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface SingerService {
     List<Singer> searchBySinger(String keyword);
+
+    Singer getById(Integer id);
+
+    List<Singer> list();
 }

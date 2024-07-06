@@ -7,4 +7,8 @@ import java.util.List;
 public interface SongService {
 
     List<Song> searchBySong(String keyword);
+
+    List<Song> getBySingerId(Integer singerId);
+
+    List<Song> list();
 }

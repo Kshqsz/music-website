@@ -32,11 +32,13 @@
                 </el-table>
                 </el-tab-pane>
                 <el-tab-pane label="歌手">
-                    <div v-for="item in this.searchSingerList" :key="item.id">
+                    <div class="avatar-row1">
+                        <div v-for="item in this.searchSingerList" :key="item.id">
                         <el-avatar :size="209" :shape="'circle'">
-                            <img :src="item.url"  @click=goDetail(item.id) style="cursor: pointer;"/>
+                            <img :src="item.pic"  @click=goDetail(item.id) style="cursor: pointer;"/>
                         </el-avatar>
-                        <div class="avatar-text">{{ item.name }}</div>
+                        <div class="avatar-text2">{{ item.name }}</div>
+                    </div>
                     </div>
                 </el-tab-pane>
             </el-tabs>
@@ -48,7 +50,9 @@
 
 import { mapGetters } from 'vuex';
 import {CaretRightOutlined, HeartOutlined, PauseOutlined, HeartFilled} from "@ant-design/icons-vue"
+import mixins  from '@/mixins';
 export default {
+    mixins: [mixins],
     components: {
         CaretRightOutlined,
         HeartOutlined,
@@ -68,5 +72,12 @@ export default {
 .sres-card {
     margin-left: 10%;
     margin-right: 10%;
+}
+.avatar-text2 {
+  padding-top: 10px;
+  padding-left: 76px;
+  padding-bottom: 30px;
+  font-size: 18px;
+  color: #333;
 }
 </style>

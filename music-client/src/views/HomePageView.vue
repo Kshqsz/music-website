@@ -11,7 +11,7 @@
     <div class="avatar-row1">
       <div v-for="item in singerList" :key="item.id">
         <el-avatar :size="213" :shape="'round'">
-          <img :src="item.url" @click=goDetail(item.id) style="cursor: pointer;"/>
+          <img :src="item.pic" @click=goDetail(item.id) style="cursor: pointer;"/>
         </el-avatar>
         <div class="avatar-text1">{{ item.name }}</div>
       </div>
@@ -31,13 +31,13 @@
           width="300">
         </el-table-column>
         <el-table-column
-          prop="singer"
+          prop="singerName"
           label="歌手">
         </el-table-column>
         <el-table-column>
           <template slot-scope="scope">
-            <CaretRightOutlined style="font-size: 25px;" @click="play(scope.row.id, scope.row.url)" v-if="!scope.row.isPlay"></CaretRightOutlined> 
-            <PauseOutlined style="font-size: 25px;" @click="play(scope.row.id, scope.row.url)" v-else></PauseOutlined> 
+            <CaretRightOutlined style="font-size: 25px;" @click="play(scope.row.url, scope.row.pic, scope.row.name, scope.row.singerName)" v-if="(!isPlay || (isPlay && title !== scope.row.name))"></CaretRightOutlined> 
+            <PauseOutlined style="font-size: 25px;" @click="play(scope.row.url, scope.row.pic, scope.row.name, scope.row.singerName)" v-if="(isPlay && title === scope.row.name)"></PauseOutlined> 
               &nbsp;&nbsp;&nbsp;&nbsp;
             <HeartOutlined style="font-size: 25px;" @click="star(scope.row.id)" v-if="!scope.row.isStar"></HeartOutlined> 
             <HeartFilled style="font-size: 25px;" @click="star(scope.row.id)" v-else></HeartFilled> 
@@ -49,7 +49,17 @@
 
 <script>
 import {CaretRightOutlined, HeartOutlined, PauseOutlined, HeartFilled} from "@ant-design/icons-vue"
+import mixins  from '@/mixins';
+import axios from "../utils/axios"
+import { mapGetters } from "vuex";
 export default {
+  computed: {
+    ...mapGetters([
+      'isPlay',
+      'title'
+    ])
+  },
+  mixins: [mixins],
   components: {
     CaretRightOutlined,
     HeartOutlined,
@@ -65,25 +75,36 @@ export default {
                 {id:3, url:require("../assets/img/background.jpg")}   
             ],
             singerList:[
-              {id: 0, url: require("@/assets/img/Jay.jpg"), name: "周杰伦"},
-              {id: 1, url: require("@/assets/img/ljj.jpg"), name: "林俊杰"},
-              {id: 2, url: require("@/assets/img/wlh.jpg"), name: "王力宏"},
-              {id: 3, url: require("@/assets/img/tz.jpg"), name: "陶喆"},
-              {id: 4, url: require("@/assets/img/dzq.jpg"), name: "邓紫棋"},
-              {id: 5, url: require("@/assets/img/zl.jpg"), name: "赵雷"},
-              {id: 6, url: require("@/assets/img/cyx.jpg"), name: "陈奕迅"},
             ],
             songList: [
-              { id: 0, url: "http://localhost:8080/song/一路向北.mp3", name: "一路向北", singer: "周杰伦", isPlay: false, isStar: false},
-              { id: 1, url: "http://localhost:8080/song/七里香.mp3", name: "七里香", singer: "周杰伦", isPlay: false, isStar: false},
-              { id: 2, url: "http://localhost:8080/song/晴天.mp3", name: "晴天", singer: "周杰伦", isPlay: false, isStar: false},
-          ],
+            ],
         }
     },
     methods: {
-      goDetail(id) {
-        this.$router.push({path: `singer-detail/${id}`})
+      async listSinger() {
+        await axios.get("/singer/list").then(res => {
+          if (res.data.code === 0) {
+            this.singerList = res.data.data;
+            this.singerList.slice(0, 5);
+          } else {
+            this.$message.error("服务错误");
+          }
+        }) 
+      },
+      async listSong() {
+        await axios.get("/song/list").then(res => {
+          if (res.data.code === 0) {
+            this.songList = res.data.data;
+            this.songList.slice(0, 5);
+          } else {
+            this.$message.error("服务错误");
+          }
+        })
       }
+    },
+    created() {
+      this.listSinger();
+      this.listSong();
     }
 }
 </script>
@@ -91,7 +112,7 @@ export default {
 <style>
 .avatar-text1 {
   padding-top: 10px;
-  padding-left: 75px;
+  padding-left: 78px;
   padding-bottom: 30px;
   font-size: 15px;
   color: #333;

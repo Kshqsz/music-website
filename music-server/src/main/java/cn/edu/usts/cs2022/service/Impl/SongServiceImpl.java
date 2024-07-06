@@ -23,4 +23,25 @@ public class SongServiceImpl implements SongService {
         List<Song> songList = songMapper.searchBySong(keyword);
         return songList;
     }
+
+    /**
+     * 根据 歌手id 查找歌曲
+     * @param singerId
+     * @return
+     */
+    @Override
+    public List<Song> getBySingerId(Integer singerId) {
+        List<Song> songList = songMapper.getBySingerId(singerId);
+        return songList;
+    }
+
+    /**
+     * 查询所有歌曲
+     * @return
+     */
+    @Override
+    public List<Song> list() {
+        List<Song> songList = songMapper.list();
+        return songList;
+    }
 }

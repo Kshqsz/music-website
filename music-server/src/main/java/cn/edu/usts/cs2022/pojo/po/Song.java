@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -17,11 +18,9 @@ public class Song {
 
     private String name;
 
-    private String introduction;
+    private LocalDateTime createTime;
 
-    private Date createTime;
-
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     private String pic;
 
