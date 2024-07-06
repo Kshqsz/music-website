@@ -1321,3 +1321,17 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 17:16:56:804  INFO 21248 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
 17:59:39:038  INFO 21248 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 17:59:39:058  INFO 21248 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+18:19:35:956  INFO 18468 --- [main] c.e.usts.cs2022.MusicServerApplication   : Starting MusicServerApplication using Java 11.0.6 on hsk with PID 18468 (E:\GitHub\music-website\music-server\target\classes started by 24564 in E:\GitHub\music-website\music-server)
+18:19:35:958  INFO 18468 --- [main] c.e.usts.cs2022.MusicServerApplication   : No active profile set, falling back to 1 default profile: "default"
+18:19:36:638  INFO 18468 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+18:19:36:645  INFO 18468 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+18:19:36:645  INFO 18468 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+18:19:36:734  INFO 18468 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+18:19:36:735  INFO 18468 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 746 ms
+18:19:37:186  INFO 18468 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+18:19:37:195  INFO 18468 --- [main] c.e.usts.cs2022.MusicServerApplication   : Started MusicServerApplication in 1.585 seconds (JVM running for 2.919)
+18:20:08:097  INFO 18468 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+18:20:08:104  INFO 18468 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+18:20:08:104  INFO 18468 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+18:20:08:139  INFO 18468 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+18:20:08:322  INFO 18468 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
