@@ -17,4 +17,7 @@ public interface UserMapper {
     User getUserByUsername(String username);
 
     void register(User user);
+
+    @Select("select * from user where id = #{id}")
+    User getById(Integer id);
 }

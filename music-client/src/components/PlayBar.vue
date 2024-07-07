@@ -57,7 +57,7 @@
                 <el-slider class="volume" v-model="volume" :vertical="true"></el-slider>
             </div>
             <!-- 收藏 -->
-            <div class="item">
+            <div class="item" @click="star(id)">
                 <svg class="icon">
                     <use xlink:href="#icon-xihuan"></use>
                 </svg>
@@ -75,7 +75,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import mixins from '@/mixins';
 export default {
+    mixins: [mixins],
     name: 'play-bar',
     data() {
         return {
@@ -120,7 +122,6 @@ export default {
     },
     methods: {
         togglePlay() {
-
             if (this.isPlay) {
                 this.$store.commit('setIsPlay', false);
             } else {

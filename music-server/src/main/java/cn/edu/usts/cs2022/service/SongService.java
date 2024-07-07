@@ -11,4 +11,6 @@ public interface SongService {
     List<Song> getBySingerId(Integer singerId);
 
     List<Song> list();
+
+    List<Song> getByIds(List<Integer> songIdList);
 }

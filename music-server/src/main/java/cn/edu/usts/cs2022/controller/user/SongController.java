@@ -6,6 +6,7 @@ import cn.edu.usts.cs2022.pojo.po.Singer;
 import cn.edu.usts.cs2022.pojo.po.Song;
 import cn.edu.usts.cs2022.service.SingerService;
 import cn.edu.usts.cs2022.service.SongService;
+import cn.edu.usts.cs2022.utils.ThreadLocalUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

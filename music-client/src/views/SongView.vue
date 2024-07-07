@@ -16,15 +16,15 @@
           width="300">
         </el-table-column>
         <el-table-column
-          prop="singer"
+          prop="singerName"
           label="歌手">
         </el-table-column>
         <el-table-column>
-          <template slot-scope="scope">
-            <CaretRightOutlined style="font-size: 25px;" @click="play(scope.row.url, scope.row.pic, scope.row.name, scope.row.singerName)" v-if="(!isPlay || (isPlay && title !== scope.row.name))"></CaretRightOutlined> 
-            <PauseOutlined style="font-size: 25px;" @click="play(scope.row.url, scope.row.pic, scope.row.name, scope.row.singerName)" v-if="(isPlay && title === scope.row.name)"></PauseOutlined> 
+          <template slot-scope="scope"> 
+            <CaretRightOutlined style="font-size: 25px;" @click="play(scope.row.id,scope.row.url, scope.row.pic, scope.row.name, scope.row.singerName)" v-if="(!isPlay || (isPlay && title !== scope.row.name))"></CaretRightOutlined> 
+            <PauseOutlined style="font-size: 25px;" @click="play(scope.row.id,scope.row.url, scope.row.pic, scope.row.name, scope.row.singerName)" v-if="(isPlay && title === scope.row.name)"></PauseOutlined> 
               &nbsp;&nbsp;&nbsp;&nbsp;
-            <HeartOutlined style="font-size: 25px;" @click="star(scope.row.id)" v-if="!scope.row.isStar"></HeartOutlined> 
+            <HeartOutlined style="font-size: 25px;" @click="star(scope.row.id)" v-if="!isStar(scope.row.id)"></HeartOutlined> 
             <HeartFilled style="font-size: 25px;" @click="star(scope.row.id)" v-else></HeartFilled>
           </template>
         </el-table-column>
@@ -37,7 +37,9 @@
 import {CaretRightOutlined, HeartOutlined, PauseOutlined, HeartFilled} from "@ant-design/icons-vue"
 import { mapGetters } from "vuex"
 import axios from "../utils/axios"
+import mixins from "@/mixins"
 export default {
+  mixins: [mixins],
   components: {
     CaretRightOutlined,
     HeartOutlined,
@@ -47,7 +49,9 @@ export default {
   computed: {
       ...mapGetters([
           'isPlay',
-          'title'
+          'title',
+          'userId',
+          'starList'
       ])
   },
   data() {
@@ -60,26 +64,11 @@ export default {
         await axios.get("/song/list").then(res => {
           if (res.data.code === 0) {
             this.songList = res.data.data;
-            this.songList.slice(0, 5);
           } else {
             this.$message.error("服务错误");
           }
         })
       },
-    play(url, pic, title, artist) {
-      this.$store.commit('setUrl', url);
-      this.$store.commit('setPicUrl', pic);
-      this.$store.commit('setTitle', title);
-      this.$store.commit('setArtist', artist);
-      if (this.isPlay) {
-        this.$store.commit('setIsPlay', false);
-      } else {
-        this.$store.commit('setIsPlay', true);
-      }
-    },
-    star(id) {
-      this.songList[id].isStar = !this.songList[id].isStar
-    }
   },
   created() {
     this.listSong();

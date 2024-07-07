@@ -2,14 +2,22 @@ package cn.edu.usts.cs2022.controller.user;
 
 import cn.edu.usts.cs2022.pojo.dto.LoginDTO;
 import cn.edu.usts.cs2022.pojo.dto.RegisterDTO;
+import cn.edu.usts.cs2022.pojo.dto.UserDTO;
 import cn.edu.usts.cs2022.pojo.po.Result;
+import cn.edu.usts.cs2022.pojo.po.Song;
 import cn.edu.usts.cs2022.pojo.po.User;
+import cn.edu.usts.cs2022.service.SongService;
+import cn.edu.usts.cs2022.service.StarService;
 import cn.edu.usts.cs2022.service.UserService;
+import cn.edu.usts.cs2022.utils.JwtUtil;
+import cn.edu.usts.cs2022.utils.ThreadLocalUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -17,6 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+
+    private final StarService starService;
+
+    private final SongService songService;
 
     /**
      * 用户登录
@@ -32,7 +44,14 @@ public class UserController {
         if (user == null) {
             return Result.error("用户名或密码错误");
         } else {
-            return Result.success();
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("id", user.getId());
+            String token = JwtUtil.genToken(claims);
+            UserDTO userDTO = new UserDTO();
+            userDTO.setUser(user);
+            userDTO.setUserId(user.getId());
+            userDTO.setToken(token);
+            return Result.success(userDTO);
         }
     }
 
@@ -58,6 +77,38 @@ public class UserController {
         return Result.success();
     }
 
+    @GetMapping("/getById/{id}")
+    public Result<User> getById(@PathVariable("id") Integer id) {
+        User user = userService.getById(id);
+        return Result.success(user);
+    }
 
+    @PostMapping("/star/{songId}")
+    public Result star(@PathVariable("songId") Integer songId) {
+        Map<String, Object> map = ThreadLocalUtil.get();
+        Integer userId = (Integer) map.get("id");
+        Integer cnt = starService.count(songId, userId);
+        if (cnt > 0) {
+            return Result.error("已经收藏过了");
+        } else {
+            starService.star(songId, userId);
+            return Result.success();
+        }
+    }
+    @GetMapping("/starList/{id}")
+    public Result<List<Song>> starList(@PathVariable("id") Integer id) {
+        List<Integer> songIdList = starService.getSongIdList(id);
+        if (songIdList.isEmpty()) {
+            List<Song> songList = new ArrayList<>();
+            return Result.success(songList);
+        }
+        List<Song> songList = songService.getByIds(songIdList);
+        return Result.success(songList);
+    }
 
+    @DeleteMapping("/cancelStar/{id}")
+    public Result cancelStar(@PathVariable("id") Integer id) {
+        starService.cancelStar(id);
+        return Result.success();
+    }
 }

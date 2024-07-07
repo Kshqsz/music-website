@@ -38,7 +38,9 @@
 
 <script>
 import axios from '@/utils/axios'
+import mixins from '@/mixins'
 export default {
+  mixins: [mixins],
   data() {
     return {
       loginForm: {
@@ -49,10 +51,15 @@ export default {
   },
   methods: {
     login() {
-      axios.post("/user/login", this.loginForm).then(res => {
+      axios.post("/user/login", this.loginForm).then(async res => {
         if (res.data.code === 0) {
+          this.$store.commit("setToken", res.data.data.token);
           this.$store.commit("setActiveIndex", '/homePage');
           this.$store.commit("setIsLogin", true);
+          this.$store.commit("setUserId", res.data.data.userId);
+          this.$store.commit("setUser", res.data.data.user);
+          this.$store.commit("setUsername", this.loginForm.username);
+          await this.getStarList(res.data.data.userId);
           this.$router.push('/homePage');
           this.$message.success("登录成功~ 欢迎你 " + this.loginForm.username + "~");
         } else {

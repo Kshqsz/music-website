@@ -18,7 +18,7 @@ const song = {
         currentPlayList: [], // 当前播放列表
         songDetails: null, // 单个歌单信息
         currentPlayIndex: -1, // 当前歌曲在歌曲列表的位置
-        searchSongList: []
+        searchSongList: [],
     },
     getters: {
         searchSongList: state => state.searchSongList,
