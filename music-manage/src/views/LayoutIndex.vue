@@ -17,7 +17,7 @@
               <span slot="title">系统首页</span>
             </el-menu-item>
             <el-menu-item index="/song" router="true">
-              <span slot="title">歌单管理</span>
+              <span slot="title">歌曲管理</span>
             </el-menu-item>
             <el-menu-item index="/singer" router="true">
               <span slot="title">歌手管理</span>
