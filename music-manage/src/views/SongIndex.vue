@@ -23,6 +23,14 @@
         label="上传时间"
         width="180">
       </el-table-column>
+      <el-table-column>
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -35,18 +43,6 @@ export default {
         date: '2016-05-02',
         singerName: '周杰伦',
         name: '一路向北'
-      }, {
-        date: '2016-05-02',
-        singerName: '周杰伦',
-        name: '花海'
-      }, {
-        date: '2016-05-02',
-        singerName: '周杰伦',
-        name: '以父之名'
-      }, {
-        date: '2016-05-02',
-        singerName: '周杰伦',
-        name: '明明就'
       }]
     }
   }
