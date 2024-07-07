@@ -57,7 +57,7 @@ export default {
             if (res.data.code === 0) {
               await this.getStarList(this.userId);
             } else {
-              this.$message.errror("服务错误");
+              this.$message.error("服务错误");
             }
           }) 
         }
