@@ -49,4 +49,15 @@ public class UserServiceImpl implements UserService {
         user.setUpdateTime(LocalDateTime.now());
         userMapper.register(user);
     }
+
+    /**
+     * 根据 id 查询用户
+     * @param id
+     * @return
+     */
+    @Override
+    public User getById(Integer id) {
+        User user = userMapper.getById(id);
+        return user;
+    }
 }

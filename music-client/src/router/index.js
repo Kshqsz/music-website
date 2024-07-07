@@ -8,6 +8,8 @@ import HomePageView from '@/views/HomePageView.vue'
 import SingerView from '@/views/SingerView.vue'
 import SingerDetail from '@/components/SingerDetail.vue'
 import SearchResult from '@/components/SearchResult.vue'
+import PersonDetail from '@/components/PersonDetail.vue'
+import MyStar from '@/components/MyStar.vue'
 
 Vue.use(VueRouter)
 
@@ -24,7 +26,9 @@ const routes = [
       { path: '/singer', name: 'singer', component: SingerView },
       { path: '/homePage', name: 'homePage', component: HomePageView },
       { path: '/singer-detail/:id', name:"singer-detail", component: SingerDetail},
-      { path: '/searchResult', name: 'searchResult', component: SearchResult}
+      { path: '/searchResult', name: 'searchResult', component: SearchResult},
+      { path: '/personDetail', name: 'personDetail', component: PersonDetail},
+      { path: '/myStar', name: "myStar", component: MyStar},
     ]
   },
   {

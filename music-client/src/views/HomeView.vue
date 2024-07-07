@@ -27,14 +27,24 @@
 
             <el-menu-item index="/login" v-show="!this.isLogin">登录</el-menu-item>
             <el-menu-item index="/register" v-show="!this.isLogin">注册</el-menu-item>
+            <span style="font-size: 18px;" v-show="this.isLogin">
+                欢迎你~ <strong>{{ this.username }}</strong>
+            </span>
+            &nbsp;&nbsp;&nbsp;
             <el-dropdown v-if="this.isLogin">
               <span class="el-dropdown-link">
-                <el-avatar :size="55"/>
+                <el-avatar :size="55"> 
+                  <img :src="user.avatar" alt="">
+                </el-avatar>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>个人信息</el-dropdown-item>
-                <el-dropdown-item>我的收藏</el-dropdown-item>
-                <el-dropdown-item>
+                <el-dropdown-item icon="el-icon-user">
+                  <span @click="personDetail()"> 个人信息 </span>  
+                </el-dropdown-item>
+                <el-dropdown-item icon="el-icon-star-off">
+                  <span @click="myStar()">我的收藏</span>
+                </el-dropdown-item>
+                <el-dropdown-item icon="el-icon-back">
                   <span @click="exit()">退出</span>
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -54,17 +64,23 @@
 <script>
 import axios from '@/utils/axios'
 import { mapGetters } from 'vuex';
+import mixins from '@/mixins';
 export default {
+  mixins: [mixins],
   computed: {
     ...mapGetters([
       "activeIndex",
       "isLogin",
-      "searchSongList"
+      "searchSongList",
+      "username",
+      "userId",
+      "user"
     ])
   },
   data() {
     return {
-        keyword: ''
+        keyword: '',
+        curUser: {},
     }
   },
   methods: {
@@ -87,7 +103,19 @@ export default {
         this.$store.commit("setIsLogin", false);
         this.$store.commit("setActiveIndex", "/login");
         this.$router.push("/login");
+        this.$store.commit("setUserId", 0);
+        this.$store.commit("setUserName", "");
+        this.$store.commit("setUser", {});
+        this.$message.success("注销成功~");
+      },
+      personDetail() {
+        this.$router.push("/personDetail")
+      },
+      myStar() {
+        this.$router.push("/myStar");
       }
+  },
+  created() {
   }
 }
 </script>

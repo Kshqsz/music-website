@@ -21,11 +21,11 @@
                     label="歌手">
                     </el-table-column>
                     <el-table-column>
-                    <template slot-scope="scope">
-                        <CaretRightOutlined style="font-size: 25px;" @click="play(scope.row.id, scope.row.url, scope.row.pic, scope.row.name, scope.row.singer)" v-if="!scope.row.isPlay"></CaretRightOutlined> 
-                        <PauseOutlined style="font-size: 25px;" @click="play(scope.row.id, scope.row.url, scope.row.pic, scope.row.name, scope.row.singer)" v-else></PauseOutlined> 
+                    <template slot-scope="scope"> 
+                        <CaretRightOutlined style="font-size: 25px;" @click="play(scope.row.id,scope.row.url, scope.row.pic, scope.row.name, scope.row.singerName)" v-if="(!isPlay || (isPlay && title !== scope.row.name))"></CaretRightOutlined> 
+                        <PauseOutlined style="font-size: 25px;" @click="play(scope.row.id,scope.row.url, scope.row.pic, scope.row.name, scope.row.singerName)" v-if="(isPlay && title === scope.row.name)"></PauseOutlined> 
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <HeartOutlined style="font-size: 25px;" @click="star(scope.row.id)" v-if="!scope.row.isStar"></HeartOutlined> 
+                        <HeartOutlined style="font-size: 25px;" @click="star(scope.row.id)" v-if="!isStar(scope.row.id)"></HeartOutlined> 
                         <HeartFilled style="font-size: 25px;" @click="star(scope.row.id)" v-else></HeartFilled>
                     </template>
                     </el-table-column>

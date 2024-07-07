@@ -13,7 +13,17 @@ const store =  new Vuex.Store({
     user,
     home,
     singer
-  }
+  },
+  state: {
+    token: '',
+    },
+    getters: {
+    },
+    mutations: {
+        setToken(state, token) {
+            state.token = token;
+        },
+    },
 })
 
 export default store

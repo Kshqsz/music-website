@@ -14,4 +14,11 @@
             </if>
         </where>
     </select>
+
+    <select id="getByIds" resultType="cn.edu.usts.cs2022.pojo.po.Song">
+        select * from song where id in
+        <foreach collection="songIdList" item="songId" separator="," open="(" close=")">
+            #{songId}
+        </foreach>
+    </select>
 </mapper>

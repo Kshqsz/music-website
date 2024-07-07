@@ -2,6 +2,7 @@ package cn.edu.usts.cs2022.mapper;
 
 import cn.edu.usts.cs2022.pojo.po.Song;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface SongMapper {
 
     @Select("select * from song")
     List<Song> list();
+
+    List<Song> getByIds(@Param("songIdList") List<Integer> songIdList);
 }
