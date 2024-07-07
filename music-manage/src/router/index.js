@@ -7,6 +7,7 @@ import song from '@/views/SongIndex.vue'
 import user from '@/views/UserIndex.vue'
 import home from '@/views/HomeIndex.vue'
 import sinsong from '@/views/SinMusicIndex.vue'
+import addsinger from '@/views/AddSingerIndex.vue'
 
 
 
@@ -29,7 +30,9 @@ const routes = [
       {path: '/singer', component: singer},
       {path: '/song' , component: song},
       {path: '/user', component: user},
-      {path: '/sinsong', component: sinsong}
+      {path: '/sinsong', component: sinsong},
+      {path: '/addsinger',component: addsinger}
+
     ]
   }
  

@@ -5,7 +5,7 @@
         <el-input v-model="input" placeholder="请输入内容" style="width: 200px;" class="in"></el-input>
         <el-button type="primary" class="button">搜索</el-button>
       </div>
-      <el-button type="primary" class="add">新增歌手</el-button>
+      <el-button type="primary" class="add" @click="add()">新增歌手</el-button>
     </div>
     <el-table
       :data="tableData"
@@ -128,6 +128,9 @@ export default {
     },
     handleEdit () {
       this.dialogFormVisible=true
+    },
+    add () {
+      this.$router.push('/addsinger');
     }
   }
 }
