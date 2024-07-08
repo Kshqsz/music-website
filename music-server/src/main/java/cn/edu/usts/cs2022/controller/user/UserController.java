@@ -2,6 +2,7 @@ package cn.edu.usts.cs2022.controller.user;
 
 import cn.edu.usts.cs2022.pojo.dto.LoginDTO;
 import cn.edu.usts.cs2022.pojo.dto.RegisterDTO;
+import cn.edu.usts.cs2022.pojo.dto.UpdatePasswordDTO;
 import cn.edu.usts.cs2022.pojo.dto.UserDTO;
 import cn.edu.usts.cs2022.pojo.po.Result;
 import cn.edu.usts.cs2022.pojo.po.Song;
@@ -10,9 +11,13 @@ import cn.edu.usts.cs2022.service.SongService;
 import cn.edu.usts.cs2022.service.StarService;
 import cn.edu.usts.cs2022.service.UserService;
 import cn.edu.usts.cs2022.utils.JwtUtil;
+import org.hibernate.validator.constraints.URL;
 import cn.edu.usts.cs2022.utils.ThreadLocalUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -109,6 +114,29 @@ public class UserController {
     @DeleteMapping("/cancelStar/{id}")
     public Result cancelStar(@PathVariable("id") Integer id) {
         starService.cancelStar(id);
+        return Result.success();
+    }
+
+    @PostMapping("/updateAvatar")
+    public Result<User> updateAvatar(@RequestBody String avatarUrl) throws UnsupportedEncodingException {
+        avatarUrl = URLDecoder.decode(avatarUrl, "UTF-8");
+        avatarUrl = avatarUrl.substring(0, avatarUrl.length() - 1);
+        System.out.println(avatarUrl);
+        userService.updateAvatar(avatarUrl);
+        Map<String, Object> map = ThreadLocalUtil.get();
+        Integer id = (Integer) map.get("id");
+        User user = userService.getById(id);
+        return Result.success(user);
+    }
+
+    @PutMapping("/updatePassword")
+    public Result updatePassword(@RequestBody UpdatePasswordDTO updatePasswordDTO) {
+        String newPassword = updatePasswordDTO.getNewPassword();
+        String reNewPassword = updatePasswordDTO.getReNewPassword();
+        if (!newPassword.equals(reNewPassword)) {
+            return Result.error("两次密码不一致!");
+        }
+        userService.updatePassword(newPassword);
         return Result.success();
     }
 }

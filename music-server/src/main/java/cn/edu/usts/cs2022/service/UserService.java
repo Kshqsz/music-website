@@ -10,4 +10,8 @@ public interface UserService {
     void register(String username, String password);
 
     User getById(Integer id);
+
+    void updateAvatar(String avatarUrl);
+
+    void updatePassword(String newPassword);
 }

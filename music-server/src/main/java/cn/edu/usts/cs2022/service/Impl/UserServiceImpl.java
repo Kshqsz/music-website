@@ -3,10 +3,12 @@ package cn.edu.usts.cs2022.service.Impl;
 import cn.edu.usts.cs2022.mapper.UserMapper;
 import cn.edu.usts.cs2022.pojo.po.User;
 import cn.edu.usts.cs2022.service.UserService;
+import cn.edu.usts.cs2022.utils.ThreadLocalUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -59,5 +61,19 @@ public class UserServiceImpl implements UserService {
     public User getById(Integer id) {
         User user = userMapper.getById(id);
         return user;
+    }
+
+    @Override
+    public void updateAvatar(String avatarUrl) {
+        Map<String, Object> map = ThreadLocalUtil.get();
+        Integer id = (Integer) map.get("id");
+        userMapper.updateAvatar(avatarUrl, id);
+    }
+
+    @Override
+    public void updatePassword(String newPassword) {
+        Map<String, Object> map = ThreadLocalUtil.get();
+        Integer id = (Integer) map.get("id");
+        userMapper.updatePassword(newPassword, id);
     }
 }

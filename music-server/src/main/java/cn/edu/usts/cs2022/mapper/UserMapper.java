@@ -1,10 +1,7 @@
 package cn.edu.usts.cs2022.mapper;
 
 import cn.edu.usts.cs2022.pojo.po.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
@@ -20,4 +17,12 @@ public interface UserMapper {
 
     @Select("select * from user where id = #{id}")
     User getById(Integer id);
+
+    @Update("update user set avatar= #{avatarUrl}, update_time = now() where id = #{id}")
+    void updateAvatar(@Param("avatarUrl") String avatarUrl,
+                      @Param("id") Integer id);
+
+    @Update("update user set password = #{newPassword}, update_time = now() where id = #{id}")
+    void updatePassword(@Param("newPassword") String newPassword,
+                        @Param("id") Integer id);
 }

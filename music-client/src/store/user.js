@@ -6,6 +6,7 @@ const user = {
         user: {},
         //token: "",
         starList: [],
+        avatar: "",
     },
     getters: {
         isLogin: state => state.isLogin,
@@ -13,9 +14,11 @@ const user = {
         username: state => state.username,
         user: state => state.user,
         starList: state => state.starList,
+        avatar: state => state.avatar,
         //token: state => state.token
     },
     mutations: {
+        setAvatar: (state, avatar) => {state.avatar = avatar},
         setIsLogin: (state, isLogin) => {state.isLogin = isLogin},
         setUserId: (state, userId) => {state.userId = userId},
         setUsername: (state, username) => {state.username = username},

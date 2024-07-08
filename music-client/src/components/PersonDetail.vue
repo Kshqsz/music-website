@@ -18,8 +18,8 @@
                         placeholder = "新密码" 
                         type = "password" 
                         style="width: 400px;"
-                        v-model="newPassword" >
-                        </el-input>
+                        v-model="passwordForm.newPassword">
+                    </el-input>
                     </el-form-item>
                     <el-form-item  prop="reNewPassword">
                         <el-input 
@@ -27,7 +27,7 @@
                         type = "password" 
                         placeholder = "确认密码" 
                         style="width: 400px;" 
-                        v-model="reNewPassword">
+                        v-model="passwordForm.reNewPassword">
                         </el-input>
                     </el-form-item>
                     <el-form-item >
@@ -46,6 +46,27 @@
                 </el-form>
             </el-tab-pane>
             <el-tab-pane label="修改头像">
+                <el-upload 
+                    ref="uploadRef"
+                    class="avatar-uploader" 
+                    :show-file-list="false"
+                    :auto-upload="true"
+                    action="/api/upload"
+                    name="file"
+                    :headers="{'Authorization': token}"
+                    :on-success="uploadSuccess"
+                    >
+                    <img :src="imgUrl" class="avatar" style="width: 278px;"/>
+                </el-upload>
+                <br />
+                <el-button type="primary" icon="el-icon-plus" size="large"  @click="chooseImg()" style="width: 200px">
+                    选择图片
+                </el-button>
+                <br>
+                <br>
+                <el-button type="success" icon="el-icon-upload" size="large" @click="updateAvatar()" style="width: 200px">
+                    上传头像
+                </el-button>
             </el-tab-pane>
           </el-tabs>
         </div>
@@ -54,32 +75,100 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import store from '@/store'
+import axios from '@/utils/axios';
 export default {
-    data() {
-        return {
-            newPassword: '',
-            reNewPassword: ''
-        }
-    },
     computed: {
         ...mapGetters([
             'user',
-            'starList'
+            'starList',
+            'avatar'
         ])
+    },
+    data() {
+        return {
+            passwordForm: {
+                newPassword: "",
+                reNewPassword: "",
+            },
+            imgUrl: '',
+            token: store.state.token,
+        }
     },
     methods: {
         cancel() {
-            this.newPassword = "",
-            this.reNewPassword = ""
+            this.passwordForm.newPassword = "",
+            this.passwordForm.reNewPassword = ""
         },
         updatePassword() {
-            alert("修改密码");
+            axios.put("/user/updatePassword", this.passwordForm).then(res => {
+                if (res.data.code === 0) {
+                    this.$message.success("修改成功");
+                    this.cancel();
+                } else {
+                    this.$message.error("两次密码不一致！");
+                }
+            })
+        },
+        uploadSuccess(response) {
+            this.imgUrl = `${response.data}`
+        },
+        chooseImg() {
+            this.$refs.uploadRef.$el.querySelector('input').click()
+        },
+        async updateAvatar() {
+            await axios.post("/user/updateAvatar", this.imgUrl).then(res => {
+                if (res.data.code === 0) {
+                    this.$store.commit("setUser", res.data.data);
+                    this.$store.commit("setAvatar", res.data.data.avatar);
+                    this.$message.success("头像上传成功~");
+                } else {
+                    this.$message.error("服务错误");
+                }
+            })
+            this.$store.commit("setAvatar", this.imgUrl);
+        }
+    },
+    created() {
+        this.imgUrl = this.user.avatar || require('@/assets/img/avatar.jpg');
+        if (this.imgUrl === null) {
+            this.imgUrl = require('@/assets/img/avatar.jpg');
         }
     }
 }
 </script>
 
-<style>
+<style lang="scss">
+.avatar-uploader {
+    :deep() {
+        .avatar {
+            width: 178px;
+            height: 178px;
+            display: block;
+        }
+
+        .el-upload {
+            border: 1px dashed var(--el-border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: var(--el-transition-duration-fast);
+        }
+
+        .el-upload:hover {
+            border-color: var(--el-color-primary);
+        }
+
+        .el-icon.avatar-uploader-icon {
+            font-size: 28px;
+            color: #8c939d;
+            width: 278px;
+            height: 278px;
+            text-align: center;
+        }
+    }
+}
 .user-info {
   display: flex;
 }
