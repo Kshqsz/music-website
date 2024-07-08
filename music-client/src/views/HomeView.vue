@@ -74,7 +74,8 @@ export default {
       "searchSongList",
       "username",
       "userId",
-      "user"
+      "user",
+      "avatar"
     ])
   },
   data() {
@@ -103,9 +104,6 @@ export default {
         this.$store.commit("setIsLogin", false);
         this.$store.commit("setActiveIndex", "/login");
         this.$router.push("/login");
-        this.$store.commit("setUserId", 0);
-        this.$store.commit("setUserName", "");
-        this.$store.commit("setUser", {});
         this.$message.success("注销成功~");
       },
       personDetail() {

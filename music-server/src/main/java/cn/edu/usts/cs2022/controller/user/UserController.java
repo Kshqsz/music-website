@@ -10,9 +10,13 @@ import cn.edu.usts.cs2022.service.SongService;
 import cn.edu.usts.cs2022.service.StarService;
 import cn.edu.usts.cs2022.service.UserService;
 import cn.edu.usts.cs2022.utils.JwtUtil;
+import org.hibernate.validator.constraints.URL;
 import cn.edu.usts.cs2022.utils.ThreadLocalUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -110,5 +114,17 @@ public class UserController {
     public Result cancelStar(@PathVariable("id") Integer id) {
         starService.cancelStar(id);
         return Result.success();
+    }
+
+    @PostMapping("/updateAvatar")
+    public Result<User> updateAvatar(@RequestBody String avatarUrl) throws UnsupportedEncodingException {
+        avatarUrl = URLDecoder.decode(avatarUrl, "UTF-8");
+        avatarUrl = avatarUrl.substring(0, avatarUrl.length() - 1);
+        System.out.println(avatarUrl);
+        userService.updateAvatar(avatarUrl);
+        Map<String, Object> map = ThreadLocalUtil.get();
+        Integer id = (Integer) map.get("id");
+        User user = userService.getById(id);
+        return Result.success(user);
     }
 }
