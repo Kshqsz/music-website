@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="ma"></div>
+    <div id="his"></div>
   </div>
 </template>
 
@@ -10,19 +10,20 @@ import * as echarts from 'echarts';
 
 export default{
   props:['data'],
+  
   mounted() {
     const keys = Object.keys(this.data);
     const values = Object.values(this.data);
-    //const colors = ['red','blue','green','yellow','pink','black']
-    var myChart = echarts.init(document.getElementById('ma'));
+   // const colors = ['red','blue','green','yellow','pink','black']
+    var myChart = echarts.init(document.getElementById('his'));
     myChart.setOption({
     title: {
-      text: '歌曲收藏榜',
-      x:'center'
+      text: '歌手歌曲数',
+      x : 'center'
     },
     tooltip: {},
     xAxis: {
-      data: keys
+      data:keys
     },
     yAxis: {},
     series: [
@@ -41,7 +42,7 @@ export default{
 </script>
 
 <style scoped>
-#ma{
+#his{
   width: 600px;
   height: 300px;
 }

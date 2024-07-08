@@ -82,6 +82,7 @@
       <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
       </div>
     </el-dialog>
+    <el-button type="primary" class="button" onclick="window.print()">打印预览</el-button>
     </div>
 </template>
 

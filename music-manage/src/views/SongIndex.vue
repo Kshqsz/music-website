@@ -32,6 +32,7 @@
           </template>
       </el-table-column>
     </el-table>
+    <el-button type="primary" class="button" onclick="window.print()">打印预览</el-button>
   </div>
 </template>
 
@@ -43,7 +44,32 @@ export default {
         date: '2016-05-02',
         singerName: '周杰伦',
         name: '一路向北'
-      }]
+      },
+      {
+        date: '2016-05-02',
+        singerName: '周杰伦',
+        name: '一路向北'
+      },
+      {
+        date: '2016-05-02',
+        singerName: '周杰伦',
+        name: '一路向北'
+      },
+      {
+        date: '2016-05-02',
+        singerName: '周杰伦',
+        name: '一路向北'
+      },
+      {
+        date: '2016-05-02',
+        singerName: '周杰伦',
+        name: '一路向北'
+      },
+      {
+        date: '2016-05-02',
+        singerName: '周杰伦',
+        name: '一路向北'
+      },]
     }
   }
 }
