@@ -59,6 +59,7 @@ export default {
           this.$store.commit("setUserId", res.data.data.userId);
           this.$store.commit("setUser", res.data.data.user);
           this.$store.commit("setUsername", this.loginForm.username);
+          this.$store.commit("setAvatar", res.data.data.avatar);
           await this.getStarList(res.data.data.userId);
           this.$router.push('/homePage');
           this.$message.success("登录成功~ 欢迎你 " + this.loginForm.username + "~");

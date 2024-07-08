@@ -51,7 +51,7 @@
                     class="avatar-uploader" 
                     :show-file-list="false"
                     :auto-upload="true"
-                    action="/upload"
+                    action="/api/upload"
                     name="file"
                     :headers="{'Authorization': token}"
                     :on-success="uploadSuccess"
@@ -77,18 +77,19 @@
 <script>
 import { mapGetters } from 'vuex';
 import store from '@/store'
+import axios from '@/utils/axios';
 export default {
     computed: {
         ...mapGetters([
             'user',
             'starList',
+            'avatar'
         ])
     },
     data() {
         return {
             newPassword: '',
             reNewPassword: '',
-            avatar: require('@/assets/img/default.png'),
             imgUrl: '',
             token: store.state.token,
         }
@@ -101,16 +102,30 @@ export default {
         updatePassword() {
             alert("修改密码");
         },
-        uploadSuccess(result) {
-            this.imgUrl = result.data;
+        uploadSuccess(response) {
+            this.imgUrl = `${response.data}`
         },
         chooseImg() {
-            console.log(this.token);
             this.$refs.uploadRef.$el.querySelector('input').click()
+        },
+        async updateAvatar() {
+            await axios.post("/user/updateAvatar", this.imgUrl).then(res => {
+                if (res.data.code === 0) {
+                    this.$store.commit("setUser", res.data.data);
+                    this.$store.commit("setAvatar", res.data.data.avatar);
+                    this.$message.success("头像上传成功~");
+                } else {
+                    this.$message.error("服务错误");
+                }
+            })
+            this.$store.commit("setAvatar", this.imgUrl);
         }
     },
     created() {
-        this.imgUrl = this.user.avatar || this.avatar;
+        this.imgUrl = this.user.avatar || require('@/assets/img/avatar.jpg');
+        if (this.imgUrl === null) {
+            this.imgUrl = require('@/assets/img/avatar.jpg');
+        }
     }
 }
 </script>

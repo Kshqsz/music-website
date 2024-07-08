@@ -18,11 +18,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(loginInterceptor).excludePathPatterns(
                 "/user/login",
                 "/user/register",
-                "/img/七里香.jpg",
-                "/img/一路向北.jpg",
-                "/song/一路向北.mp3",
-                "/song/七里香.mp3",
-                "/img/hsk.jpg",
-                "/img/wyh.jpg");
+                "/upload");
     }
 }
