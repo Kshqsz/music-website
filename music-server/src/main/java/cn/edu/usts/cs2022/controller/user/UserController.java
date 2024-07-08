@@ -2,6 +2,7 @@ package cn.edu.usts.cs2022.controller.user;
 
 import cn.edu.usts.cs2022.pojo.dto.LoginDTO;
 import cn.edu.usts.cs2022.pojo.dto.RegisterDTO;
+import cn.edu.usts.cs2022.pojo.dto.UpdatePasswordDTO;
 import cn.edu.usts.cs2022.pojo.dto.UserDTO;
 import cn.edu.usts.cs2022.pojo.po.Result;
 import cn.edu.usts.cs2022.pojo.po.Song;
@@ -126,5 +127,16 @@ public class UserController {
         Integer id = (Integer) map.get("id");
         User user = userService.getById(id);
         return Result.success(user);
+    }
+
+    @PutMapping("/updatePassword")
+    public Result updatePassword(@RequestBody UpdatePasswordDTO updatePasswordDTO) {
+        String newPassword = updatePasswordDTO.getNewPassword();
+        String reNewPassword = updatePasswordDTO.getReNewPassword();
+        if (!newPassword.equals(reNewPassword)) {
+            return Result.error("两次密码不一致!");
+        }
+        userService.updatePassword(newPassword);
+        return Result.success();
     }
 }

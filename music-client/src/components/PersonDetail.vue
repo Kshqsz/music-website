@@ -18,8 +18,8 @@
                         placeholder = "新密码" 
                         type = "password" 
                         style="width: 400px;"
-                        v-model="newPassword" >
-                        </el-input>
+                        v-model="passwordForm.newPassword">
+                    </el-input>
                     </el-form-item>
                     <el-form-item  prop="reNewPassword">
                         <el-input 
@@ -27,7 +27,7 @@
                         type = "password" 
                         placeholder = "确认密码" 
                         style="width: 400px;" 
-                        v-model="reNewPassword">
+                        v-model="passwordForm.reNewPassword">
                         </el-input>
                     </el-form-item>
                     <el-form-item >
@@ -56,8 +56,7 @@
                     :headers="{'Authorization': token}"
                     :on-success="uploadSuccess"
                     >
-                    <img v-if="imgUrl" :src="imgUrl" class="avatar" style="width: 278px;"/>
-                    <img v-else :src="avatar" width="278" />
+                    <img :src="imgUrl" class="avatar" style="width: 278px;"/>
                 </el-upload>
                 <br />
                 <el-button type="primary" icon="el-icon-plus" size="large"  @click="chooseImg()" style="width: 200px">
@@ -88,19 +87,28 @@ export default {
     },
     data() {
         return {
-            newPassword: '',
-            reNewPassword: '',
+            passwordForm: {
+                newPassword: "",
+                reNewPassword: "",
+            },
             imgUrl: '',
             token: store.state.token,
         }
     },
     methods: {
         cancel() {
-            this.newPassword = "",
-            this.reNewPassword = ""
+            this.passwordForm.newPassword = "",
+            this.passwordForm.reNewPassword = ""
         },
         updatePassword() {
-            alert("修改密码");
+            axios.put("/user/updatePassword", this.passwordForm).then(res => {
+                if (res.data.code === 0) {
+                    this.$message.success("修改成功");
+                    this.cancel();
+                } else {
+                    this.$message.error("两次密码不一致！");
+                }
+            })
         },
         uploadSuccess(response) {
             this.imgUrl = `${response.data}`
