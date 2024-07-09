@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div class="search">
+        <el-input v-model="input" placeholder="请输入内容" style="width: 200px;" class="in"></el-input>
+        <el-button type="primary" class="button">搜索</el-button>
+      </div>
     <el-table
       :data="tableData"
       style="width: 100%">
@@ -74,3 +78,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.button{
+  margin-left: 20px;
+}
+</style>

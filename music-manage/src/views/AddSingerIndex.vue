@@ -1,33 +1,46 @@
 <template>
   <div>
     <h1>新增歌手信息</h1>
-    <form @submit.prevent="addSinger">
-      <label for="name">姓名:</label>
-      <input type="text" id="name" v-model="singer.name" required><br>
-      
-      <label for="gender">性别:</label>
-      <select id="gender" v-model="singer.gender" required>
-        <option value="male">男</option>
-        <option value="female">女</option>
-      </select><br>
-      
-      <label for="bio">个人简介:</label>
-      <textarea id="bio" v-model="singer.bio" required></textarea><br>
-      
-      <label for="birthday">生日:</label>
-      <input type="date" id="birthday" v-model="singer.birthday" required><br>
-      
-      <label for="address">地址:</label>
-      <input type="text" id="address" v-model="singer.address" required><br>
-      
-      <label for="image">歌手头像:</label>
-      <input type="file" id="image" @change="handleImageUpload"><br>
-      
-      <label for="songs">歌曲:</label>
-      <input type="text" v-for="(song, index) in singer.songs" :key="index" v-model="singer.songs[index]" required><br>
-      
-      <button type="submit">提交</button>
-    </form>
+    <el-form ref="form" :model="form" label-width="80px">
+      <el-upload
+      style="background-color: gainsboro"
+        class="avatar-uploader"
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :show-file-list="false"
+        :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload">
+        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+      </el-upload>
+      <el-form-item label="歌手姓名">
+        <el-input v-model="form.name"></el-input>
+      </el-form-item>
+      <el-form-item label="出生年份">
+        <div class="block">
+          <span class="demonstration">默认</span>
+          <el-date-picker
+            v-model="birth"
+            type="date"
+            placeholder="选择日期">
+          </el-date-picker>
+        </div>
+      </el-form-item>
+      <el-form-item label="性别">
+        <el-radio-group v-model="form.sex">
+          <el-radio label="男"></el-radio>
+          <el-radio label="女"></el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="籍贯">
+        <el-input v-model="form.location"></el-input>
+      </el-form-item>
+      <el-form-item label="歌手描述">
+        <el-input type="textarea" v-model="form.introduction"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit">添加</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
@@ -35,40 +48,41 @@
 export default {
   data() {
     return {
-      singer: {
-        name: '',
-        gender: 'male',
-        bio: '',
-        birthday: '',
-        address: '',
-        image: null,
-        songs: []
-      }
+      form: {
+          name: '',
+          sex:'',
+          birth:'',
+          location:'',
+          imageUrl: '',
+          introduction: ''
+        }
     };
   },
   methods: {
-    addSinger() {
-      // 实现保存歌手信息的逻辑，可以发送到后端API
-      console.log(this.singer);
+    onSubmit() {
+      console.log('submit!');
     },
-    handleImageUpload(event) {
-      const file = event.target.files[0];
-      // 处理上传的图片文件
-      console.log('上传图片:', file);
-    }
+    handleAvatarSuccess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
+      }
   }
 };
 </script>
 
 <style scoped>
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
+
 
 h1 {
   text-align: center;
@@ -76,6 +90,7 @@ h1 {
 }
 
 form {
+  text-align: center;
   margin-top: 20px;
 }
 
@@ -84,23 +99,37 @@ label {
 }
 
 input, select, textarea {
-  width: 100%;
+  width: 30%;
   padding: 8px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 4px;
+.avatar-uploader{
+  width: 180px;
 }
-
-button:hover {
-  background-color: #0056b3;
-}
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
 </style>

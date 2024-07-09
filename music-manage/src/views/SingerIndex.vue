@@ -65,23 +65,50 @@
     </el-table>
 
 
-    <el-dialog title="修改歌手信息" :visible.sync="dialogFormVisible">
-      <el-form :model="form">
-        <el-form-item label="歌手姓名" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="活动区域" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="请选择活动区域">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
-      </el-form>
+    <el-dialog title="修改歌手信息" :visible.sync="dialogFormVisible" class="dialog">
+      <el-form ref="form" :model="form" label-width="80px">
+      <el-upload
+      style="background-color: gainsboro"
+        class="avatar-uploader"
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :show-file-list="false"
+        :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload">
+        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+      </el-upload>
+      <el-form-item label="歌手姓名">
+        <el-input v-model="form.name"></el-input>
+      </el-form-item>
+      <el-form-item label="出生年份">
+        <div class="block">
+          <span class="demonstration"></span>
+          <el-date-picker
+            v-model="birth"
+            type="date"
+            placeholder="选择日期">
+          </el-date-picker>
+        </div>
+      </el-form-item>
+      <el-form-item label="性别">
+        <el-radio-group v-model="form.sex">
+          <el-radio label="男"></el-radio>
+          <el-radio label="女"></el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="籍贯">
+        <el-input v-model="form.location"></el-input>
+      </el-form-item>
+      <el-form-item label="歌手描述">
+        <el-input type="textarea" v-model="form.introduction"></el-input>
+      </el-form-item>
+    </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="dialogFormVisible = false">取 消</el-button>
       <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
       </div>
     </el-dialog>
+    
     <el-button type="primary" class="button" onclick="window.print()">打印预览</el-button>
     </div>
 </template>
@@ -90,46 +117,54 @@
 export default {
   data() {
     return {
+      //formLabelWidth: '120px',
       dialogFormVisible: false,
       form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formLabelWidth: '120px',
+        name: '',
+        birth: '',
+        sex: '',
+        location: '',
+        introduction: ''
+      },
+      initialForm: {
+        name: '',
+        birth: '',
+        sex: '',
+        location: '',
+        introduction: ''
+      },     
       tableData: [{
         id: '111',
         pic: '图片',
         name: '周杰伦',
         sex: '男',
         location: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]
+        }, 
+      ]
     }
   },
   methods:{
     searchsong () {
       this.$router.push('/sinsong');
     },
-    handleEdit () {
-      this.dialogFormVisible=true
+    handleEdit(data) {
+      this.form = { ...data }; // 将现有数据赋值给表单字段
+      this.initialForm = { ...data }; // 存储初始数据的副本以便比较
+      this.dialogFormVisible = true;
     },
+    cancelForm() {
+      this.dialogFormVisible = false;
+      // 将表单字段重置为初始状态
+      this.form = { ...this.initialForm };
+    },
+    saveForm() {
+      // 处理保存表单数据的逻辑
+      // 保存后关闭对话框
+      this.dialogFormVisible = false;
+    },
+
+
+
     add () {
       this.$router.push('/addsinger');
     }
@@ -149,4 +184,40 @@ export default {
 .add{
   margin-right: 110px;
 }
+.dialog{
+  margin-left: 320px;
+  text-align: center;
+  width: 1000px;
+}
+.avatar-uploader{
+  
+  width: 170px;
+  height: 170px;
+  margin-left: 150px;
+  margin-bottom: 20px;
+}
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    /* position: relative;
+    overflow: hidden; */
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
+
 </style>

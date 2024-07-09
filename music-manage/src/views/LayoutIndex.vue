@@ -4,7 +4,19 @@
       <el-header>
         <div class="head">
           <div class="lef">Spoon-music 后台管理</div>
-          <div class="rig"> <el-avatar>admin</el-avatar><div>
+          <div class="rig">
+            <el-col :span="12">
+            <el-dropdown >
+              <span class="el-dropdown-link">
+                <el-avatar>admin</el-avatar>
+              </span>
+              <el-dropdown-menu slot="dropdown"  split-button="true">
+                <el-dropdown-item ><button @click="loginout" style="background-color: transparent; border: none;">退出登录</button></el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </el-col>
+             
+             <div>
     </div></div>
         </div>
 
@@ -38,9 +50,11 @@
 <script>
 
 export default({
-  setup() {
-    
-  },
+  methods:{
+    loginout () {
+      this.$router.push('/');
+    }
+  }
 })
 </script>
 <style>
