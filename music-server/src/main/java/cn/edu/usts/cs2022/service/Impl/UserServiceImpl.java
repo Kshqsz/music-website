@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -75,5 +76,16 @@ public class UserServiceImpl implements UserService {
         Map<String, Object> map = ThreadLocalUtil.get();
         Integer id = (Integer) map.get("id");
         userMapper.updatePassword(newPassword, id);
+    }
+
+    @Override
+    public List<User> listUser() {
+        List<User> userList = userMapper.listUser();
+        return userList;
+    }
+
+    @Override
+    public void deleteUser(Integer id) {
+        userMapper.deleteUser(id);
     }
 }

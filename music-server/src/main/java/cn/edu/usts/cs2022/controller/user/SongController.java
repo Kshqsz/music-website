@@ -41,5 +41,10 @@ public class SongController {
         List<Song> songList = songService.list();
         return Result.success(songList);
     }
+    @GetMapping
+    public Result<Song> getById(Integer id) {
+        Song song = songService.getById(id);
+        return Result.success(song);
+    }
 
 }

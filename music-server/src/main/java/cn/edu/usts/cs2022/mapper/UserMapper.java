@@ -3,6 +3,8 @@ package cn.edu.usts.cs2022.mapper;
 import cn.edu.usts.cs2022.pojo.po.User;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
 
@@ -25,4 +27,10 @@ public interface UserMapper {
     @Update("update user set password = #{newPassword}, update_time = now() where id = #{id}")
     void updatePassword(@Param("newPassword") String newPassword,
                         @Param("id") Integer id);
+
+    @Select("select * from user")
+    List<User> listUser();
+
+    @Delete("delete from user where id = #{id}")
+    void deleteUser(Integer id);
 }
