@@ -35,8 +35,8 @@
     <img src="../assets/img/guitar.jpg" alt="" class="background-image">
   </div>
 </template>
-
 <script>
+import axios from "@/utils/axios"
 export default {
   data() {
     return {
@@ -47,9 +47,16 @@ export default {
     }
   },
   methods: {
-    login() {
-      this.$router.push('/home');
-      
+    async login() {
+      await axios.post("/admin/login", this.loginForm).then(res => {
+        if (res.data.code === 0) {
+          this.$store.commit("setToken", res.data.data);
+          this.$message.success("登录成功");
+          this.$router.push('/home');
+        } else {
+          this.$message.error("服务错误");
+        }
+      })
     }
   }
 }

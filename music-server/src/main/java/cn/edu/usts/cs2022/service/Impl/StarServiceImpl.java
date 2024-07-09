@@ -39,4 +39,9 @@ public class StarServiceImpl implements StarService {
         Integer userId = (Integer) map.get("id");
         starMapper.cancelStar(userId, songId);
     }
+
+    @Override
+    public Integer countStar(Integer id) {
+        return starMapper.countStar(id);
+    }
 }

@@ -30,7 +30,7 @@ const routes = [
       {path: '/singer', component: singer},
       {path: '/song' , component: song},
       {path: '/user', component: user},
-      {path: '/sinsong', component: sinsong},
+      {path: '/sinsong/:id', component: sinsong},
       {path: '/addsinger',component: addsinger}
 
     ]

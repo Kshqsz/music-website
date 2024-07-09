@@ -20,4 +20,6 @@ public interface UserService {
     List<User> listUser();
 
     void deleteUser(Integer id);
+
+    Integer countUser();
 }

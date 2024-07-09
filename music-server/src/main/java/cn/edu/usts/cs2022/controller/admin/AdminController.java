@@ -4,10 +4,7 @@ import cn.edu.usts.cs2022.pojo.dto.LoginDTO;
 import cn.edu.usts.cs2022.pojo.dto.SingerDTO;
 import cn.edu.usts.cs2022.pojo.dto.SongDTO;
 import cn.edu.usts.cs2022.pojo.po.*;
-import cn.edu.usts.cs2022.service.AdminService;
-import cn.edu.usts.cs2022.service.SingerService;
-import cn.edu.usts.cs2022.service.SongService;
-import cn.edu.usts.cs2022.service.UserService;
+import cn.edu.usts.cs2022.service.*;
 import cn.edu.usts.cs2022.utils.JwtUtil;
 import cn.edu.usts.cs2022.utils.ThreadLocalUtil;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +26,8 @@ public class AdminController {
 
     public final AdminService adminService;
 
+    public final StarService starService;
+
     @PostMapping("/login")
     public Result login(@RequestBody LoginDTO loginDTO) {
         String username = loginDTO.getUsername();
@@ -38,9 +37,9 @@ public class AdminController {
             return Result.error("账号或密码错误!");
         }
         Map<String, Object> claims = new HashMap<>();
-        Map<String, Object> map = ThreadLocalUtil.get();
-        Integer id = (Integer) map.get("id");
-        claims.put("id", id);
+//        Map<String, Object> map = ThreadLocalUtil.get();
+//        Integer id = (Integer) map.get("id");
+//        claims.put("id", id);
         String token = JwtUtil.genToken(claims);
         return Result.success(token);
     }
@@ -90,5 +89,29 @@ public class AdminController {
     public Result updateSong(Song song) {
         songService.updateSong(song);
         return Result.success();
+    }
+
+    @GetMapping("/countUser")
+    public Result<Integer> countUser() {
+        Integer cnt = userService.countUser();
+        return Result.success(cnt);
+    }
+
+    @GetMapping("/countSinger")
+    public Result<Integer> countSinger() {
+        Integer cnt = singerService.countSinger();
+        return Result.success(cnt);
+    }
+
+    @GetMapping("/countSong")
+    public Result<Integer> countSong() {
+        Integer cnt = songService.countSong();
+        return Result.success(cnt);
+    }
+
+    @GetMapping("/countStar/{id}")
+    public Result<Integer> countStar(@PathVariable("id") Integer id) {
+        Integer cnt = starService.countStar(id);
+        return Result.success(cnt);
     }
 }

@@ -28,7 +28,7 @@
       <div class="box1">
         <i class="el-icon-monitor"></i>
         <div>
-          <strong>{{mvnumber}}</strong>
+          <strong>{{0}}</strong>
           <br>
           视频总数
         </div>
@@ -53,7 +53,7 @@
 
 <script>
 
-
+import axios from "@/utils/axios"
 import HistogramIndex  from '@/components/HistogramIndex.vue';
 import HistogramIndex_2 from '@/components/HistogramIndex_2.vue';
 import PieIndex from '@/components/PieIndex.vue';
@@ -76,8 +76,35 @@ export default {
       singersexlist:{'man':30,'female':10},
       singersonglist:{'周杰伦':20,'林俊杰':10,'蔡依林':15,'陶喆':5},
       collectonsongslist:{'晴天':100,'七里香':80,'青花瓷':50,'以父之名':30,'倒带':25,'曹操':10}
-
     };
+  },
+  methods: {
+    countUser() {
+      axios.get("/admin/countUser").then(res => {
+        if (res.data.code === 0) {
+          this.usernumber = res.data.data;
+        }
+      })
+    },
+    countSinger() {
+      axios.get("/admin/countSinger").then(res => {
+        if (res.data.code === 0) {
+          this.singernumber = res.data.data;
+        }
+      })
+    },
+    countSong() {
+      axios.get("/admin/countSong").then(res => {
+        if (res.data.code === 0) {
+          this.songnumber = res.data.data;
+        }
+      })
+    },
+  },
+  created() {
+    this.countUser();
+    this.countSinger();
+    this.countSong();
   }
 }
 

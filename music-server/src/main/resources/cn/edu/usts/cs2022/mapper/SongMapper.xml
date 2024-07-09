@@ -5,7 +5,7 @@
 
 <mapper namespace="cn.edu.usts.cs2022.mapper.SongMapper">
     <insert id="addSong">
-        insert into song(singer_name, name, create_time, update_name, pic, url)
+        insert into song(singer_name, name, create_time, update_time, pic, url)
         values (#{singerName}, #{name}, now(), now(), #{pic}, #{url})
     </insert>
     <update id="updateSong">

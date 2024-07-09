@@ -17,4 +17,6 @@ public interface SingerService {
     void updateSinger(Singer singer);
 
     void deleteSinger(Integer id);
+
+    Integer countSinger();
 }

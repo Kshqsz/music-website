@@ -10,4 +10,6 @@ public interface StarService {
     List<Integer> getSongIdList(Integer id);
 
     void cancelStar(Integer id);
+
+    Integer countStar(Integer id);
 }

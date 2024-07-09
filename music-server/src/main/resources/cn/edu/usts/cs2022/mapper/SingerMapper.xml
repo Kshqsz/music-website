@@ -5,7 +5,7 @@
 
 <mapper namespace="cn.edu.usts.cs2022.mapper.SingerMapper">
     <insert id="addSinger">
-        insert into singer(name, sex, birth, pic, loaction, intoruction)
+        insert into singer(name, sex, birth, pic, location, introduction)
         values (#{name}, #{sex}, #{birth}, #{pic}, #{location}, #{introduction})
     </insert>
     <update id="updateSinger">

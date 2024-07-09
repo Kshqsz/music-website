@@ -88,4 +88,10 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Integer id) {
         userMapper.deleteUser(id);
     }
+
+    @Override
+    public Integer countUser() {
+        Integer cnt = userMapper.countUser();
+        return cnt;
+    }
 }

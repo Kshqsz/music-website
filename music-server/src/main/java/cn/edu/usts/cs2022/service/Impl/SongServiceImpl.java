@@ -72,4 +72,9 @@ public class SongServiceImpl implements SongService {
     public void updateSong(Song song) {
         songMapper.updateSong(song);
     }
+
+    @Override
+    public Integer countSong() {
+        return songMapper.countSong();
+    }
 }

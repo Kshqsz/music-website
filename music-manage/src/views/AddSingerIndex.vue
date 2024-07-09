@@ -5,11 +5,10 @@
       <el-upload
       style="background-color: gainsboro"
         class="avatar-uploader"
-        action="https://jsonplaceholder.typicode.com/posts/"
+        action="/api/upload"
         :show-file-list="false"
-        :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload">
-        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+        :on-success="uploadSuccess">
+        <img v-if="imgUrl" :src="imgUrl" class="avatar">
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
       <el-form-item label="歌手姓名">
@@ -17,9 +16,9 @@
       </el-form-item>
       <el-form-item label="出生年份">
         <div class="block">
-          <span class="demonstration">默认</span>
+          <span class="demonstration"></span>
           <el-date-picker
-            v-model="birth"
+            v-model="form.birth"
             type="date"
             placeholder="选择日期">
           </el-date-picker>
@@ -27,24 +26,25 @@
       </el-form-item>
       <el-form-item label="性别">
         <el-radio-group v-model="form.sex">
-          <el-radio label="男"></el-radio>
-          <el-radio label="女"></el-radio>
+          <el-radio :label="1">男</el-radio>
+          <el-radio :label="2">女</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="籍贯">
+      <el-form-item label="故乡">
         <el-input v-model="form.location"></el-input>
       </el-form-item>
       <el-form-item label="歌手描述">
         <el-input type="textarea" v-model="form.introduction"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">添加</el-button>
+        <el-button type="primary" @click="onSubmit()">添加</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
+import axios from "@/utils/axios"
 export default {
   data() {
     return {
@@ -55,28 +55,40 @@ export default {
           location:'',
           imageUrl: '',
           introduction: ''
-        }
+        },
+      imgUrl: "",
     };
   },
   methods: {
     onSubmit() {
-      console.log('submit!');
+      axios.post("/admin/addSinger", this.form).then(res => {
+        if (res.data.code === 0) {
+          this.$message.success("添加成功!");
+        } else {
+          this.$message.error("添加失败!");
+        }
+      })
     },
-    handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
+    uploadSuccess(response) {
+      this.imgUrl = `${response.data}`;
+      this.form.pic = `${response.data}`;
+      this.$message.success("上传成功");  
+    }
+    // handleAvatarSuccess(res, file) {
+    //     this.imageUrl = URL.createObjectURL(file.raw);
+    //   },
+    //   beforeAvatarUpload(file) {
+    //     const isJPG = file.type === 'image/jpeg';
+    //     const isLt2M = file.size / 1024 / 1024 < 2;
 
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
-      }
+    //     if (!isJPG) {
+    //       this.$message.error('上传头像图片只能是 JPG 格式!');
+    //     }
+    //     if (!isLt2M) {
+    //       this.$message.error('上传头像图片大小不能超过 2MB!');
+    //     }
+    //     return isJPG && isLt2M;
+    //   }
   }
 };
 </script>

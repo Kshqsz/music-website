@@ -24,4 +24,8 @@ public interface SingerMapper {
 
     @Delete("delete from singer where id = #{singerId}")
     void deleteSinger(Integer singerId);
+
+    @Select("select count(*) from singer")
+    Integer countSinger();
+
 }

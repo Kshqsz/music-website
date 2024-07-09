@@ -21,9 +21,11 @@
         width="100">
       </el-table-column>
       <el-table-column
-        prop="sex"
         label="性别"
         width="100">
+        <template slot-scope="scope">
+          <span>{{ tableData[scope.$index].sex == 1  ? '男' : '女'}}</span>
+        </template>
       </el-table-column>
       <el-table-column
         prop="birth"
@@ -31,52 +33,51 @@
         width="120">
       </el-table-column>
       <el-table-column
-        prop="pic"
         label="图片"
         width="140">
+        <template slot-scope="scope">
+          <img :src="tableData[scope.$index].pic" alt="" style="width: 85px;">
+        </template>
       </el-table-column>
       <el-table-column
         prop="location"
-        label="籍贯"
+        label="故乡"
         width="180">
-      </el-table-column>
-      <el-table-column
-        prop="introduction"
-        label="个人简介">
       </el-table-column>
       <el-table-column label="查看歌曲">
       <template slot-scope="scope">
         <el-button
           size="mini"
-          @click="searchsong(scope.$index, scope.row)">查看歌曲</el-button>
+          @click="searchsong(scope.row.id)">查看歌曲</el-button>
         </template>
       </el-table-column>
       <el-table-column label="操作">
       <template slot-scope="scope">
         <el-button
           size="mini"
-          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          @click="handleEdit(scope.row.id)">编辑</el-button>
         <el-button
           size="mini"
           type="danger"
-          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-      </template>
+          @click="handleDelete(scope.row.id)">删除</el-button>
+      </template> 
     </el-table-column>
     </el-table>
 
 
+
+
     <el-dialog title="修改歌手信息" :visible.sync="dialogFormVisible" class="dialog">
       <el-form ref="form" :model="form" label-width="80px">
-      <el-upload
-      style="background-color: gainsboro"
-        class="avatar-uploader"
-        action="https://jsonplaceholder.typicode.com/posts/"
-        :show-file-list="false"
-        :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload">
-        <img v-if="imageUrl" :src="imageUrl" class="avatar">
-        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-      </el-upload>
+        <el-upload
+          style="background-color: gainsboro"
+          class="avatar-uploader"
+          action="/api/upload"
+          :show-file-list="false"
+          :on-success="uploadSuccess">
+          <img v-if="imgUrl" :src="imgUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
       <el-form-item label="歌手姓名">
         <el-input v-model="form.name"></el-input>
       </el-form-item>
@@ -84,7 +85,7 @@
         <div class="block">
           <span class="demonstration"></span>
           <el-date-picker
-            v-model="birth"
+            v-model="form.birth"
             type="date"
             placeholder="选择日期">
           </el-date-picker>
@@ -92,11 +93,11 @@
       </el-form-item>
       <el-form-item label="性别">
         <el-radio-group v-model="form.sex">
-          <el-radio label="男"></el-radio>
-          <el-radio label="女"></el-radio>
+          <el-radio :label="1">男</el-radio>
+          <el-radio :label="2">女</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="籍贯">
+      <el-form-item label="故乡">
         <el-input v-model="form.location"></el-input>
       </el-form-item>
       <el-form-item label="歌手描述">
@@ -109,11 +110,15 @@
       </div>
     </el-dialog>
     
+
+
+
     <el-button type="primary" class="button" onclick="window.print()">打印预览</el-button>
     </div>
 </template>
 
 <script>
+import axios from "@/utils/axios"
 export default {
   data() {
     return {
@@ -122,6 +127,7 @@ export default {
       form: {
         name: '',
         birth: '',
+        pic: '',
         sex: '',
         location: '',
         introduction: ''
@@ -133,24 +139,27 @@ export default {
         location: '',
         introduction: ''
       },     
-      tableData: [{
-        id: '111',
-        pic: '图片',
-        name: '周杰伦',
-        sex: '男',
-        location: '上海市普陀区金沙江路 1518 弄'
-        }, 
-      ]
+      tableData: [],
+      imgUrl: ""
     }
   },
   methods:{
-    searchsong () {
-      this.$router.push('/sinsong');
+    uploadSuccess(response) {
+      this.imgUrl = `${response.data}`;
+      this.form.pic = `${response.data}`;
+      this.$message.success("上传成功");  
     },
-    handleEdit(data) {
-      this.form = { ...data }; // 将现有数据赋值给表单字段
-      this.initialForm = { ...data }; // 存储初始数据的副本以便比较
-      this.dialogFormVisible = true;
+    searchsong (id) {
+      this.$router.push({path: `sinsong/${id}`});
+    },
+    handleEdit(id) {
+      axios.get(`/singer/${id}`).then(res => {
+        if (res.data.code === 0) {
+          this.form = res.data.data;
+          this.imgUrl = this.form.pic;
+          this.dialogFormVisible = true;
+        }
+      })
     },
     cancelForm() {
       this.dialogFormVisible = false;
@@ -163,11 +172,22 @@ export default {
       this.dialogFormVisible = false;
     },
 
-
+    async list() {
+      await axios.get("/singer/list").then(res => {
+        if (res.data.code === 0) {
+          this.tableData = res.data.data;
+        } else {
+          this.$message.error("服务错误");
+        }
+      })
+    },
 
     add () {
       this.$router.push('/addsinger');
     }
+  },
+  created() {
+    this.list();
   }
 }
 </script>

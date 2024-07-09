@@ -69,4 +69,10 @@ public class SingerServiceImpl implements SingerService {
         singerMapper.deleteSinger(singerId);
 
     }
+
+    @Override
+    public Integer countSinger() {
+        Integer cnt = singerMapper.countSinger();
+        return cnt;
+    }
 }

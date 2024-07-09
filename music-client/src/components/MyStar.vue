@@ -37,16 +37,17 @@
         </el-table-column>
       </el-table>
     </el-card>
+    <br>
       <el-upload 
-          class="avatar-uploader" 
+          class="avatar-uploader1" 
           :show-file-list="false"
           :auto-upload="true"
           action="/api/upload"
           :headers="{'Authorization': token}"
           :on-success="uploadSuccess1"
           >
-          <img v-if="imgUrl" :src="imgUrl" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          <img v-if="imgUrl" :src="imgUrl" class="avatar1">
+          <i v-else class="el-icon-plus avatar-uploader-icon1" ></i>
       </el-upload>
       <br>
       <el-upload 
@@ -54,7 +55,7 @@
           :headers="{'Authorization': token}"
           :auto-upload="true"
           :on-success="uploadSuccess">
-          <el-button size="middle" type="primary">点击上传</el-button>
+          <el-button size="middle" type="primary">点击上传音频</el-button>
       </el-upload>
   </div>
 </template>
@@ -107,17 +108,17 @@ export default {
 </script>
 
 <style>
-  .avatar-uploader .el-upload {
+  .avatar-uploader1 .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
   }
-  .avatar-uploader .el-upload:hover {
+  .avatar-uploader1 .el-upload:hover {
     border-color: #409EFF;
   }
-  .avatar-uploader-icon {
+  .avatar-uploader-icon1 {
     font-size: 28px;
     color: #8c939d;
     width: 178px;
@@ -125,7 +126,7 @@ export default {
     line-height: 178px;
     text-align: center;
   }
-  .avatar {
+  .avatar1 {
     width: 178px;
     height: 178px;
     display: block;

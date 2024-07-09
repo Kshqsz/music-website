@@ -13,6 +13,14 @@
         width="180">
       </el-table-column>
       <el-table-column
+        prop="date"
+        label="封面"
+        width="180">
+        <template slot-scope="scope">
+          <img :src="tableData[scope.$index].pic" alt="" style="width: 70px;">
+        </template>
+      </el-table-column>
+      <el-table-column
         prop="name"
         label="歌曲"
         width="180">
@@ -20,11 +28,6 @@
       <el-table-column
         prop="singerName"
         label="歌手"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="date"
-        label="上传时间"
         width="180">
       </el-table-column>
       <el-table-column label="操作">
@@ -41,40 +44,26 @@
 </template>
 
 <script>
+import axios from "@/utils/axios"
 export default {
   data() {
     return {
-      tableData: [{
-        date: '2016-05-02',
-        singerName: '周杰伦',
-        name: '一路向北'
-      },
-      {
-        date: '2016-05-02',
-        singerName: '周杰伦',
-        name: '一路向北'
-      },
-      {
-        date: '2016-05-02',
-        singerName: '周杰伦',
-        name: '一路向北'
-      },
-      {
-        date: '2016-05-02',
-        singerName: '周杰伦',
-        name: '一路向北'
-      },
-      {
-        date: '2016-05-02',
-        singerName: '周杰伦',
-        name: '一路向北'
-      },
-      {
-        date: '2016-05-02',
-        singerName: '周杰伦',
-        name: '一路向北'
-      },]
+      tableData: []
     }
+  },
+  methods: {
+    async listSong() {
+      await axios.get("/song/list").then(res => {
+        if (res.data.code === 0) {
+          this.tableData = res.data.data;
+        } else {
+          this.$message.error("服务错误");
+        }
+      })
+    },
+  },
+  created() {
+    this.listSong();
   }
 }
 </script>

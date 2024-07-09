@@ -22,4 +22,6 @@ public interface SongService {
     Song getById(Integer id);
 
     void updateSong(Song song);
+
+    Integer countSong();
 }

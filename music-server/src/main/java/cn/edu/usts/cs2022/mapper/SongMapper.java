@@ -30,4 +30,8 @@ public interface SongMapper {
     Song getById(Integer id);
 
     void updateSong(Song song);
+
+    @Select("select count(*) from song")
+    Integer countSong();
+
 }

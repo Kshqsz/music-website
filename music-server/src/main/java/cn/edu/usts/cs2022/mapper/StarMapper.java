@@ -20,4 +20,7 @@ public interface StarMapper {
     @Delete("delete from star where user_id = #{userId} and song_id = #{songId}")
     void cancelStar(@Param("userId") Integer userId,
                     @Param("songId") Integer songId);
+
+    @Select("select count(*) from star where song_id = #{id}")
+    Integer countStar(Integer id);
 }
