@@ -21,10 +21,10 @@ mybatis:
     map-underscore-to-camel-case: true
 
 #spring事务管理日志
-logging:
-  level:
-    org.springframework.jdbc.support.JdbcTransactionManager: debug
-  pattern:
-    dateformat: HH:mm:ss:SSS
-  file:
-    path: "logs/${spring.application.name}"
+#logging:
+#  level:
+#    org.springframework.jdbc.support.JdbcTransactionManager: debug
+#  pattern:
+#    dateformat: HH:mm:ss:SSS
+#  file:
+#    path: "logs/${spring.application.name}"

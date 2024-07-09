@@ -1,10 +1,13 @@
 package cn.edu.usts.cs2022.service.Impl;
 
 import cn.edu.usts.cs2022.mapper.SingerMapper;
+import cn.edu.usts.cs2022.mapper.SongMapper;
+import cn.edu.usts.cs2022.pojo.dto.SingerDTO;
 import cn.edu.usts.cs2022.pojo.po.Singer;
 import cn.edu.usts.cs2022.service.SingerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,6 +15,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SingerServiceImpl implements SingerService {
     private final SingerMapper singerMapper;
+    private final SongMapper songMapper;
+
     /**
      * 根据歌手条件查询
      * @param keyword
@@ -43,5 +48,25 @@ public class SingerServiceImpl implements SingerService {
     public List<Singer> list() {
        List<Singer> singerList = singerMapper.list();
        return singerList;
+    }
+
+    @Override
+    public void addSinger(SingerDTO singerDTO) {
+        singerMapper.addSinger(singerDTO);
+    }
+
+    @Override
+    public void updateSinger(Singer singer) {
+        singerMapper.updateSinger(singer);
+    }
+
+    @Override
+    @Transactional
+    public void deleteSinger(Integer singerId) {
+        Singer singer = singerMapper.getById(singerId);
+        String singerName = singer.getName();
+        songMapper.deleteBySingerName(singerName);
+        singerMapper.deleteSinger(singerId);
+
     }
 }

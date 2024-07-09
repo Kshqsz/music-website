@@ -4,6 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.edu.usts.cs2022.mapper.SongMapper">
+    <insert id="addSong">
+        insert into song(singer_name, name, create_time, update_name, pic, url)
+        values (#{singerName}, #{name}, now(), now(), #{pic}, #{url})
+    </insert>
+    <update id="updateSong">
+        update song
+        <set>
+            <if test="singer_name != null"> singer_name = #{singerName},</if>
+            <if test="name != null"> name = #{name}, </if>
+            <if test="1 = 1"> update_time = now(), </if>
+            <if test="pic != null"> pic = #{pic}, </if>
+            <if test="url != null"> url = #{url}, </if>
+        </set>
+    </update>
 
     <select id="searchBySong" resultType="cn.edu.usts.cs2022.pojo.po.Song">
         select * from song

@@ -1,6 +1,7 @@
 package cn.edu.usts.cs2022.service.Impl;
 
 import cn.edu.usts.cs2022.mapper.SongMapper;
+import cn.edu.usts.cs2022.pojo.dto.SongDTO;
 import cn.edu.usts.cs2022.pojo.po.Song;
 import cn.edu.usts.cs2022.service.SongService;
 import lombok.RequiredArgsConstructor;
@@ -49,5 +50,26 @@ public class SongServiceImpl implements SongService {
     public List<Song> getByIds(List<Integer> songIdList) {
         List<Song> songList = songMapper.getByIds(songIdList);
         return songList;
+    }
+
+    @Override
+    public void addSong(SongDTO songDTO) {
+        songMapper.addSong(songDTO);
+    }
+
+    @Override
+    public void deleteSong(Integer id) {
+        songMapper.deleteById(id);
+    }
+
+    @Override
+    public Song getById(Integer id) {
+        Song song = songMapper.getById(id);
+        return song;
+    }
+
+    @Override
+    public void updateSong(Song song) {
+        songMapper.updateSong(song);
     }
 }
