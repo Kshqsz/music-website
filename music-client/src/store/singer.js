@@ -6,7 +6,7 @@ const singer = {
         searchSingerList: state => state.searchSingerList
     },
     mutations: {
-        setSearchSingerList: (state, searchSingerList) => {state.searchSingerList = searchSingerList}
+        setSearchSingerList: (state, searchSingerList) => { state.searchSingerList = searchSingerList }
     }
 }
 export default singer

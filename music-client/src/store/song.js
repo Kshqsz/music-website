@@ -13,7 +13,7 @@ const song = {
         title: '', //  歌名
         artist: '', //  歌手名
         picUrl: '', // 歌曲图片
-    
+
         /** 音乐列表信息 */
         currentPlayList: [], // 当前播放列表
         songDetails: null, // 单个歌单信息
@@ -36,49 +36,49 @@ const song = {
         curTime: (state) => state.curTime,
         changeTime: (state) => state.changeTime,
         autoNext: (state) => state.autoNext,
-    
+
         currentPlayList: (state) => state.currentPlayList,
         songDetails: (state) => state.songDetails,
         currentPlayIndex: (state) => state.currentPlayIndex,
     },
     mutations: {
-        setSearchSongList: (state, searchSongList) => {state.searchSongList = searchSongList},
-        
-        setTitle: (state, title) => {state.title = title},
+        setSearchSongList: (state, searchSongList) => { state.searchSongList = searchSongList },
 
-        setPicUrl: (state, picUrl) => {state.picUrl = picUrl},
+        setTitle: (state, title) => { state.title = title },
 
-        setArtist: (state, artist) => {state.artist = artist},
+        setPicUrl: (state, picUrl) => { state.picUrl = picUrl },
 
-        setListOfSongs: (state, listOfSongs) => {state.listOfSongs = listOfSongs},
-        
-        setPlayButtonUrl: (state, playButtonUrl) => {state.playButtonUrl = playButtonUrl},
+        setArtist: (state, artist) => { state.artist = artist },
 
-        setIsPlay: (state, isPlay) => {state.isPlay = isPlay},
+        setListOfSongs: (state, listOfSongs) => { state.listOfSongs = listOfSongs },
 
-        setUrl: (state, url) => {state.url = url},
+        setPlayButtonUrl: (state, playButtonUrl) => { state.playButtonUrl = playButtonUrl },
 
-        setId: (state, id) => {state.id = id},
+        setIsPlay: (state, isPlay) => { state.isPlay = isPlay },
 
-        setAutoNext: (state, autoNext) => {state.autoNext = autoNext;},
+        setUrl: (state, url) => { state.url = url },
 
-        setLyric: (state, lyric) => {state.lyric = lyric;},
+        setId: (state, id) => { state.id = id },
 
-        setPlayBtnIcon: (state, playBtnIcon) => {state.playBtnIcon = playBtnIcon;},
+        setAutoNext: (state, autoNext) => { state.autoNext = autoNext; },
 
-        setVolume: (state, volume) => {state.volume = volume;},
+        setLyric: (state, lyric) => { state.lyric = lyric; },
 
-        setDuration: (state, duration) => {state.duration = duration;},
-        
-        setCurTime: (state, curTime) => {state.curTime = curTime;},
+        setPlayBtnIcon: (state, playBtnIcon) => { state.playBtnIcon = playBtnIcon; },
 
-        setChangeTime: (state, changeTime) => {state.changeTime = changeTime;},
+        setVolume: (state, volume) => { state.volume = volume; },
 
-        setCurrentPlayList: (state, currentPlayList) => {state.currentPlayList = currentPlayList;},
+        setDuration: (state, duration) => { state.duration = duration; },
 
-        setSongDetails: (state, songDetails) => {state.songDetails = songDetails;},
-        
-        setCurrentPlayIndex: (state, currentPlayIndex) => {state.currentPlayIndex = currentPlayIndex;},
+        setCurTime: (state, curTime) => { state.curTime = curTime; },
+
+        setChangeTime: (state, changeTime) => { state.changeTime = changeTime; },
+
+        setCurrentPlayList: (state, currentPlayList) => { state.currentPlayList = currentPlayList; },
+
+        setSongDetails: (state, songDetails) => { state.songDetails = songDetails; },
+
+        setCurrentPlayIndex: (state, currentPlayIndex) => { state.currentPlayIndex = currentPlayIndex; },
     }
 }
 export default song

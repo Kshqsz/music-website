@@ -3,25 +3,23 @@
     <el-container>
       <el-header>
         <el-menu :default-active="this.activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" router>
-            <el-menu-item> 
-                <i class="el-icon-headset" style="font-size: 30px;"></i> 
-                &nbsp;
-                <span style="color: #000; font-size: large;">Spoon-music</span>
-            </el-menu-item>
-
-            <el-menu-item index="/homePage">首页</el-menu-item>
-            <el-menu-item index="/song">歌曲</el-menu-item>
-            <el-menu-item index="/singer">歌手</el-menu-item>
-            <el-menu-item>
-                <el-input 
-                    v-model="keyword"
-                    prefix-icon="el-icon-search" 
-                    placeholder="搜索" 
-                    style="width: 300px;" 
-                    @keyup.enter.native="search()">
-                </el-input>
-            </el-menu-item>
-
+          <el-menu-item> 
+            <i class="el-icon-headset" style="font-size: 30px;"></i> 
+            &nbsp;
+            <span style="color: #000; font-size: large;">Spoon-music</span>
+          </el-menu-item>
+          <el-menu-item index="/homePage">首页</el-menu-item>
+          <el-menu-item index="/song">歌曲</el-menu-item>
+          <el-menu-item index="/singer">歌手</el-menu-item>
+          <el-menu-item>
+            <el-input 
+              v-model="keyword"
+              prefix-icon="el-icon-search" 
+              placeholder="搜索" 
+              style="width: 300px;" 
+              @keyup.enter.native="search()">
+            </el-input>
+          </el-menu-item>
             <!-- 用于占位的菜单项 -->
             <span class="flex-spacer"></span>
 
@@ -39,13 +37,19 @@
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item icon="el-icon-user">
-                  <span @click="personDetail()"> 个人信息 </span>  
+                  <button @click="personDetail()" class="personal-item">
+                    个人信息
+                  </button>
                 </el-dropdown-item>
                 <el-dropdown-item icon="el-icon-star-off">
-                  <span @click="myStar()">我的收藏</span>
+                  <button @click="myStar()" class="personal-item">
+                    我的收藏
+                  </button>
                 </el-dropdown-item>
                 <el-dropdown-item icon="el-icon-back">
-                  <span @click="exit()">退出</span>
+                  <button @click="exit()" class="personal-item">
+                    退出登录
+                  </button>
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -65,6 +69,7 @@
 import axios from '@/utils/axios'
 import { mapGetters } from 'vuex';
 import mixins from '@/mixins';
+
 export default {
   mixins: [mixins],
   computed: {
@@ -85,40 +90,46 @@ export default {
     }
   },
   methods: {
-      search() {
-          axios.get("/song/search", {
-            params: {
-              keyword: this.keyword
-            }
-          }).then(res => {
-            if (res.data.code === 0) {
-              this.$store.commit('setSearchSongList', res.data.data.songList);
-              this.$store.commit('setSearchSingerList', res.data.data.singerList);
-              this.$router.push("/searchResult");
-            } else {
-              this.$message.error("服务错误");
-            }
-          })
-      },
-      exit() {
-        this.$store.commit("setIsLogin", false);
-        this.$store.commit("setActiveIndex", "/login");
-        this.$router.push("/login");
-        this.$message.success("注销成功~");
-      },
-      personDetail() {
-        this.$router.push("/personDetail")
-      },
-      myStar() {
-        this.$router.push("/myStar");
-      }
-  },
-  created() {
+    search() {
+      axios.get("/song/search", {
+        params: {
+          keyword: this.keyword
+        }
+      }).then(res => {
+        if (res.data.code === 0) {
+          this.$store.commit('setSearchSongList', res.data.data.songList);
+          this.$store.commit('setSearchSingerList', res.data.data.singerList);
+          this.$router.push("/searchResult");
+        } else {
+          this.$message.error("服务错误");
+        }
+      })
+    },
+    exit() {
+      this.$router.push("/login");
+      this.$message.success("注销成功~");
+      this.$store.commit("setIsLogin", false);
+      this.$store.commit("setActiveIndex", "/login");
+      this.$store.commit("setUrl", "");
+      this.$store.commit("setTitle", "");
+      this.$store.commit("setPicUrl", "");
+      this.$store.commit("setArtist", "");
+    },
+    personDetail() {
+      this.$router.push("/personDetail")
+    },
+    myStar() {
+      this.$router.push("/myStar");
+    }
   }
 }
 </script>
 
 <style>
+.personal-item {
+  background-color: transparent; 
+  border: none;
+}
 .copyright {
   position: relative;
   top: 50%;

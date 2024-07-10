@@ -1,15 +1,15 @@
 <template>
   <div>
     <el-card>
-        <div class="user-info">
-            <el-avatar :size="259" :shape="'circle'">
-            <img :src="user.avatar" />
-            </el-avatar>
-            <div>
-                <h1 class="user-name">{{ this.user.username}}</h1>
-            </div>
+      <div class="user-info">
+        <el-avatar :size="259" :shape="'circle'">
+        <img :src="user.avatar" />
+        </el-avatar>
+        <div>
+            <h1 class="user-name">{{ this.user.username}}</h1>
         </div>
-        <el-table
+      </div>
+      <el-table
         :data="starList"
         style="width: 100%">
         <el-table-column prop="id" width="300">
@@ -28,35 +28,31 @@
         </el-table-column>
         <el-table-column>
           <template slot-scope="scope"> 
-            <CaretRightOutlined style="font-size: 25px;" @click="play(scope.row.id, scope.row.url, scope.row.pic, scope.row.name, scope.row.singerName)" v-if="(!isPlay || (isPlay && title !== scope.row.name))"></CaretRightOutlined> 
-            <PauseOutlined style="font-size: 25px;" @click="play(scope.row.id, scope.row.url, scope.row.pic, scope.row.name, scope.row.singerName)" v-if="(isPlay && title === scope.row.name)"></PauseOutlined> 
+            <CaretRightOutlined 
+              style="font-size: 25px;" 
+              @click="play(scope.row.id, scope.row.url, scope.row.pic, scope.row.name, scope.row.singerName)" 
+              v-if="(!isPlay || (isPlay && title !== scope.row.name))">
+            </CaretRightOutlined> 
+            <PauseOutlined 
+              style="font-size: 25px;" 
+              @click="play(scope.row.id, scope.row.url, scope.row.pic, scope.row.name, scope.row.singerName)" 
+              v-if="(isPlay && title === scope.row.name)">
+            </PauseOutlined> 
               &nbsp;&nbsp;&nbsp;&nbsp;
-            <HeartOutlined style="font-size: 25px;" @click="star(scope.row.id)" v-if="!isStar(scope.row.id)"></HeartOutlined> 
-            <HeartFilled style="font-size: 25px;" @click="star(scope.row.id)" v-else></HeartFilled>
+            <HeartOutlined 
+              style="font-size: 25px;" 
+              @click="star(scope.row.id)" 
+              v-if="!isStar(scope.row.id)">
+            </HeartOutlined> 
+            <HeartFilled 
+              style="font-size: 25px;" 
+              @click="star(scope.row.id)" 
+              v-else>
+            </HeartFilled>
           </template>
         </el-table-column>
       </el-table>
-    </el-card>
-    <br>
-      <el-upload 
-          class="avatar-uploader1" 
-          :show-file-list="false"
-          :auto-upload="true"
-          action="/api/upload"
-          :headers="{'Authorization': token}"
-          :on-success="uploadSuccess1"
-          >
-          <img v-if="imgUrl" :src="imgUrl" class="avatar1">
-          <i v-else class="el-icon-plus avatar-uploader-icon1" ></i>
-      </el-upload>
-      <br>
-      <el-upload 
-          action="/api/upload" 
-          :headers="{'Authorization': token}"
-          :auto-upload="true"
-          :on-success="uploadSuccess">
-          <el-button size="middle" type="primary">点击上传音频</el-button>
-      </el-upload>
+    </el-card>  
   </div>
 </template>
 
@@ -66,69 +62,69 @@ import { mapGetters } from 'vuex';
 import mixins from "@/mixins";
 import store from '@/store'
 export default {
-  mixins: [mixins],
-    components: {
-      CaretRightOutlined,
-      PauseOutlined,
-      HeartFilled,
-      HeartOutlined
-    },
-    computed: {
-      ...mapGetters([
-          'user',
-          'starList',
-          'isPlay',
-          'title'
-      ])
-    },
-    data() {
-      return {
-        song: {
-          singerName: '',
-          name: '',
-          pic: '',
-          url: '',
-        },
-        token: store.state.token,
-        imgUrl: "",
-      }
-    },
-    methods: {
-      uploadSuccess(response) {
-        this.song.url = `${response.data}`;
-        this.$message.success("上传成功");  
+mixins: [mixins],
+  components: {
+    CaretRightOutlined,
+    PauseOutlined,
+    HeartFilled,
+    HeartOutlined
+  },
+  computed: {
+    ...mapGetters([
+      'user',
+      'starList',
+      'isPlay',
+      'title'
+    ])
+  },
+  data() {
+    return {
+      song: {
+        singerName: '',
+        name: '',
+        pic: '',
+        url: '',
       },
-      uploadSuccess1(response) {
-        this.imgUrl = `${response.data}`;
-        this.song.pic = `${response.data}`;
-        this.$message.success("上传成功");  
-      }
+      token: store.state.token,
+      imgUrl: "",
     }
+  },
+  methods: {
+    uploadSuccess(response) {
+      this.song.url = `${response.data}`;
+      this.$message.success("上传成功");  
+    },
+    uploadSuccess1(response) {
+      this.imgUrl = `${response.data}`;
+      this.song.pic = `${response.data}`;
+      this.$message.success("上传成功");  
+    }
+  }
 }
 </script>
 
 <style>
-  .avatar-uploader1 .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader1 .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon1 {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
-  .avatar1 {
-    width: 178px;
-    height: 178px;
-    display: block;
-  }
+.avatar-uploader1 .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader1 .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon1 {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar1 {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
 </style>

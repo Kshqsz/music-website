@@ -1,5 +1,6 @@
 package cn.edu.usts.cs2022.mapper;
 
+import cn.edu.usts.cs2022.pojo.dto.SingerSongDTO;
 import cn.edu.usts.cs2022.pojo.dto.SongDTO;
 import cn.edu.usts.cs2022.pojo.po.Song;
 import org.apache.ibatis.annotations.*;
@@ -34,4 +35,6 @@ public interface SongMapper {
     @Select("select count(*) from song")
     Integer countSong();
 
+    @Select("select singer_name as singerName, count(*) as cnt from song group by singer_name order by cnt desc limit 5")
+    List<SingerSongDTO> singerSong();
 }

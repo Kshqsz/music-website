@@ -25,10 +25,10 @@ const routes = [
       { path: '/song', name: 'song', component: SongView },
       { path: '/singer', name: 'singer', component: SingerView },
       { path: '/homePage', name: 'homePage', component: HomePageView },
-      { path: '/singer-detail/:id', name:"singer-detail", component: SingerDetail},
-      { path: '/searchResult', name: 'searchResult', component: SearchResult},
-      { path: '/personDetail', name: 'personDetail', component: PersonDetail},
-      { path: '/myStar', name: "myStar", component: MyStar},
+      { path: '/singer-detail/:id', name: "singer-detail", component: SingerDetail },
+      { path: '/searchResult', name: 'searchResult', component: SearchResult },
+      { path: '/personDetail', name: 'personDetail', component: PersonDetail },
+      { path: '/myStar', name: "myStar", component: MyStar },
     ]
   },
   {

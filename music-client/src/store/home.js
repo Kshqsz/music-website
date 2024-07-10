@@ -6,7 +6,7 @@ const home = {
         activeIndex: state => state.activeIndex
     },
     mutations: {
-        setActiveIndex: (state, activeIndex) => {state.activeIndex = activeIndex}
+        setActiveIndex: (state, activeIndex) => { state.activeIndex = activeIndex }
     }
 }
 

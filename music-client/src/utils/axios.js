@@ -1,6 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
-const service = axios.create({baseURL: '/api'})
+const service = axios.create({ baseURL: '/api' })
 
 service.interceptors.request.use(config => {
     const token = store.state.token;

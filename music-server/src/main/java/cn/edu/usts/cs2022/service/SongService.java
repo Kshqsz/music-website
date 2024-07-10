@@ -1,5 +1,6 @@
 package cn.edu.usts.cs2022.service;
 
+import cn.edu.usts.cs2022.pojo.dto.SingerSongDTO;
 import cn.edu.usts.cs2022.pojo.dto.SongDTO;
 import cn.edu.usts.cs2022.pojo.po.Song;
 
@@ -24,4 +25,6 @@ public interface SongService {
     void updateSong(Song song);
 
     Integer countSong();
+
+    List<SingerSongDTO> singerSong();
 }

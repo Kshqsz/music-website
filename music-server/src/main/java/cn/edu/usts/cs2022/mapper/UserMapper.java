@@ -1,5 +1,6 @@
 package cn.edu.usts.cs2022.mapper;
 
+import cn.edu.usts.cs2022.pojo.dto.SexDTO;
 import cn.edu.usts.cs2022.pojo.po.User;
 import org.apache.ibatis.annotations.*;
 
@@ -36,5 +37,6 @@ public interface UserMapper {
 
     @Select("select count(*) from user")
     Integer countUser();
+
 
 }

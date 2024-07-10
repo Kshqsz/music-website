@@ -1,11 +1,14 @@
 package cn.edu.usts.cs2022.service.Impl;
 
+import cn.edu.usts.cs2022.mapper.StarMapper;
 import cn.edu.usts.cs2022.mapper.UserMapper;
+import cn.edu.usts.cs2022.pojo.dto.SexDTO;
 import cn.edu.usts.cs2022.pojo.po.User;
 import cn.edu.usts.cs2022.service.UserService;
 import cn.edu.usts.cs2022.utils.ThreadLocalUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     public final UserMapper userMapper;
+    private final StarMapper starMapper;
 
     /**
      * 用户登录
@@ -85,8 +89,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUser(Integer id) {
         userMapper.deleteUser(id);
+        starMapper.deleteSongByUserId(id);
     }
 
     @Override
@@ -94,4 +100,5 @@ public class UserServiceImpl implements UserService {
         Integer cnt = userMapper.countUser();
         return cnt;
     }
+
 }

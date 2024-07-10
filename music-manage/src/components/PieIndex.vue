@@ -3,45 +3,44 @@
 </template>
 
 <script>
-import * as echarts from 'echarts';
+import * as echarts from "echarts";
 
 export default {
-  props:['data'],
-  mounted(){
-    var myChart = echarts.init(document.getElementById('pie'));
+  props: ["data"],
+  mounted() {
+    var myChart = echarts.init(document.getElementById("pie"));
     myChart.setOption({
       title: {
-      text: '用户性别比',
-       x : 'center'
-    },
-      series: [
-        
-    {
-      type: 'pie',
-      data: [
-        {
-          value: this.data.man,
-          name: '男'
-        },
-        {
-          value: this.data.female,
-          name: '女'
-        }
-      ],
-      tooltip: {
-        trigger: 'item',
-        formatter: '{a} <br/>{b} : {c} ({d}%)'
+        text: "用户性别比",
+        x: "center",
       },
-      radius: '50%'
-    }
-  ]
-    })
-  }
-}
+      series: [
+        {
+          type: "pie",
+          data: [
+            {
+              value: this.data.man,
+              name: "男",
+            },
+            {
+              value: this.data.female,
+              name: "女",
+            },
+          ],
+          tooltip: {
+            trigger: "item",
+            formatter: "{a} <br/>{b} : {c} ({d}%)",
+          },
+          radius: "50%",
+        },
+      ],
+    });
+  },
+};
 </script>
 
 <style scoped>
-#pie{
+#pie {
   width: 600px;
   height: 300px;
 }

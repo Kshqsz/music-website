@@ -2,7 +2,11 @@
   <div class="avatar-row">
     <div v-for="item in singerList" :key="item.id">
       <el-avatar :size="309" :shape="'circle'">
-        <img :src="item.pic"  @click=goDetail(item.id) style="cursor: pointer;"/>
+        <img
+          :src="item.pic"
+          @click="goDetail(item.id)"
+          style="cursor: pointer"
+        />
       </el-avatar>
       <div class="avatar-text">{{ item.name }}</div>
     </div>
@@ -10,31 +14,30 @@
 </template>
 
 <script>
-import axios from "../utils/axios"
-import mixins  from '@/mixins';
+import axios from "../utils/axios";
+import mixins from "@/mixins";
 export default {
   mixins: [mixins],
   data() {
     return {
-      singerList:[
-      ]
-    }
+      singerList: [],
+    };
   },
   methods: {
     async list() {
-      await axios.get("/singer/list").then(res => {
+      await axios.get("/singer/list").then((res) => {
         if (res.data.code === 0) {
           this.singerList = res.data.data;
         } else {
           this.$message.error("服务错误");
         }
-      }) 
-    }
+      });
+    },
   },
   created() {
     this.list();
-  }
-}
+  },
+};
 </script>
 
 <style>

@@ -1,5 +1,6 @@
 package cn.edu.usts.cs2022.service;
 
+import cn.edu.usts.cs2022.pojo.dto.SexDTO;
 import cn.edu.usts.cs2022.pojo.dto.SingerDTO;
 import cn.edu.usts.cs2022.pojo.po.Singer;
 
@@ -19,4 +20,6 @@ public interface SingerService {
     void deleteSinger(Integer id);
 
     Integer countSinger();
+
+    List<SexDTO> countSex();
 }

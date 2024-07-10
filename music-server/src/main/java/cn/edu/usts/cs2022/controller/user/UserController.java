@@ -139,4 +139,5 @@ public class UserController {
         userService.updatePassword(newPassword);
         return Result.success();
     }
+
 }

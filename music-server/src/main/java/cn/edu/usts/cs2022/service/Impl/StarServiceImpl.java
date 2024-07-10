@@ -1,12 +1,17 @@
 package cn.edu.usts.cs2022.service.Impl;
 
 
+import cn.edu.usts.cs2022.mapper.SongMapper;
 import cn.edu.usts.cs2022.mapper.StarMapper;
+import cn.edu.usts.cs2022.pojo.dto.SongStarDTO;
+import cn.edu.usts.cs2022.pojo.dto.SongStarTempDTO;
+import cn.edu.usts.cs2022.pojo.po.Song;
 import cn.edu.usts.cs2022.service.StarService;
 import cn.edu.usts.cs2022.utils.ThreadLocalUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +20,7 @@ import java.util.Map;
 public class StarServiceImpl implements StarService {
 
     public final StarMapper starMapper;
+    private final SongMapper songMapper;
 
     @Override
     public Integer count(Integer songId, Integer userId) {
@@ -41,7 +47,17 @@ public class StarServiceImpl implements StarService {
     }
 
     @Override
-    public Integer countStar(Integer id) {
-        return starMapper.countStar(id);
+    public List<SongStarDTO> countStar() {
+        List<SongStarTempDTO> songStarTempDTOS = starMapper.countStar();
+        List<SongStarDTO> list = new ArrayList<>();
+        for (SongStarTempDTO songStarTempDTO : songStarTempDTOS) {
+            SongStarDTO std = new SongStarDTO();
+            Integer songId = songStarTempDTO.getSongId();
+            Song song  = songMapper.getById(songId);
+            std.setSongName(song.getName());
+            std.setCnt(songStarTempDTO.getCnt());
+            list.add(std);
+        }
+        return list;
     }
 }

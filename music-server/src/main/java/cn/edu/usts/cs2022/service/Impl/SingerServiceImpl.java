@@ -2,8 +2,11 @@ package cn.edu.usts.cs2022.service.Impl;
 
 import cn.edu.usts.cs2022.mapper.SingerMapper;
 import cn.edu.usts.cs2022.mapper.SongMapper;
+import cn.edu.usts.cs2022.mapper.StarMapper;
+import cn.edu.usts.cs2022.pojo.dto.SexDTO;
 import cn.edu.usts.cs2022.pojo.dto.SingerDTO;
 import cn.edu.usts.cs2022.pojo.po.Singer;
+import cn.edu.usts.cs2022.pojo.po.Song;
 import cn.edu.usts.cs2022.service.SingerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,7 @@ import java.util.List;
 public class SingerServiceImpl implements SingerService {
     private final SingerMapper singerMapper;
     private final SongMapper songMapper;
+    private final StarMapper starMapper;
 
     /**
      * 根据歌手条件查询
@@ -67,12 +71,20 @@ public class SingerServiceImpl implements SingerService {
         String singerName = singer.getName();
         songMapper.deleteBySingerName(singerName);
         singerMapper.deleteSinger(singerId);
-
+        List<Song> songList = songMapper.getBySingerId(singerId);
+        for (Song song : songList) {
+            starMapper.deleteSong(song.getId());
+        }
     }
 
     @Override
     public Integer countSinger() {
         Integer cnt = singerMapper.countSinger();
         return cnt;
+    }
+
+    @Override
+    public List<SexDTO> countSex() {
+        return singerMapper.countSex();
     }
 }

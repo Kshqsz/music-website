@@ -1,5 +1,6 @@
 package cn.edu.usts.cs2022.service;
 
+import cn.edu.usts.cs2022.pojo.dto.SexDTO;
 import cn.edu.usts.cs2022.pojo.po.User;
 
 import java.util.List;
@@ -22,4 +23,5 @@ public interface UserService {
     void deleteUser(Integer id);
 
     Integer countUser();
+
 }

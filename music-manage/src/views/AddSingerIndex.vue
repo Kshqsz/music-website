@@ -3,12 +3,13 @@
     <h1>新增歌手信息</h1>
     <el-form ref="form" :model="form" label-width="80px">
       <el-upload
-      style="background-color: gainsboro"
+        style="background-color: gainsboro"
         class="avatar-uploader"
         action="/api/upload"
         :show-file-list="false"
-        :on-success="uploadSuccess">
-        <img v-if="imgUrl" :src="imgUrl" class="avatar">
+        :on-success="uploadSuccess"
+      >
+        <img v-if="imgUrl" :src="imgUrl" class="avatar" />
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
       <el-form-item label="歌手姓名">
@@ -20,7 +21,8 @@
           <el-date-picker
             v-model="form.birth"
             type="date"
-            placeholder="选择日期">
+            placeholder="选择日期"
+          >
           </el-date-picker>
         </div>
       </el-form-item>
@@ -44,58 +46,41 @@
 </template>
 
 <script>
-import axios from "@/utils/axios"
+import axios from "@/utils/axios";
 export default {
   data() {
     return {
       form: {
-          name: '',
-          sex:'',
-          birth:'',
-          location:'',
-          imageUrl: '',
-          introduction: ''
-        },
+        name: "",
+        sex: "",
+        birth: "",
+        location: "",
+        imageUrl: "",
+        introduction: "",
+      },
       imgUrl: "",
     };
   },
   methods: {
     onSubmit() {
-      axios.post("/admin/addSinger", this.form).then(res => {
+      axios.post("/admin/addSinger", this.form).then((res) => {
         if (res.data.code === 0) {
           this.$message.success("添加成功!");
         } else {
           this.$message.error("添加失败!");
         }
-      })
+      });
     },
     uploadSuccess(response) {
       this.imgUrl = `${response.data}`;
       this.form.pic = `${response.data}`;
-      this.$message.success("上传成功");  
-    }
-    // handleAvatarSuccess(res, file) {
-    //     this.imageUrl = URL.createObjectURL(file.raw);
-    //   },
-    //   beforeAvatarUpload(file) {
-    //     const isJPG = file.type === 'image/jpeg';
-    //     const isLt2M = file.size / 1024 / 1024 < 2;
-
-    //     if (!isJPG) {
-    //       this.$message.error('上传头像图片只能是 JPG 格式!');
-    //     }
-    //     if (!isLt2M) {
-    //       this.$message.error('上传头像图片大小不能超过 2MB!');
-    //     }
-    //     return isJPG && isLt2M;
-    //   }
-  }
+      this.$message.success("上传成功");
+    },
+  },
 };
 </script>
 
 <style scoped>
-
-
 h1 {
   text-align: center;
   color: #333;
@@ -110,7 +95,9 @@ label {
   font-weight: bold;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   width: 30%;
   padding: 8px;
   margin-bottom: 10px;
@@ -118,30 +105,30 @@ input, select, textarea {
   border-radius: 4px;
 }
 
-.avatar-uploader{
+.avatar-uploader {
   width: 180px;
 }
 .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
-  }
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
 </style>

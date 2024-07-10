@@ -19,7 +19,7 @@ import { mapGetters } from 'vuex';
     name: 'App',
     components: {
       SongAudio,
-      PlayBar
+      PlayBar,
     }
   }
 </script>

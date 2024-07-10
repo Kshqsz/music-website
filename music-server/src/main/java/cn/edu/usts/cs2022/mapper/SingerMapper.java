@@ -1,5 +1,6 @@
 package cn.edu.usts.cs2022.mapper;
 
+import cn.edu.usts.cs2022.pojo.dto.SexDTO;
 import cn.edu.usts.cs2022.pojo.dto.SingerDTO;
 import cn.edu.usts.cs2022.pojo.po.Singer;
 import org.apache.ibatis.annotations.Delete;
@@ -28,4 +29,6 @@ public interface SingerMapper {
     @Select("select count(*) from singer")
     Integer countSinger();
 
+    @Select("select sex, count(*) as cnt from singer group by sex")
+    List<SexDTO> countSex();
 }

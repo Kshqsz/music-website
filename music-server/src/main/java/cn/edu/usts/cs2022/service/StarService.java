@@ -1,5 +1,7 @@
 package cn.edu.usts.cs2022.service;
 
+import cn.edu.usts.cs2022.pojo.dto.SongStarDTO;
+
 import java.util.List;
 
 public interface StarService {
@@ -11,5 +13,5 @@ public interface StarService {
 
     void cancelStar(Integer id);
 
-    Integer countStar(Integer id);
+    List<SongStarDTO> countStar();
 }

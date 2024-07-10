@@ -1,89 +1,102 @@
 <template>
-  <div>    
-    <el-card class="box-card" >
-      <span class = "title">Spoon-music 管理员登录</span>
-      <br>
+  <div>
+    <div class="lef" style="margin-top: 20px">
+      <i class="el-icon-headset" style="font-size: 30px"></i>
+      <strong style="font-size: 20px"> Spoon-music 后台管理 </strong>
+    </div>
+    <el-card class="box-card">
+      <span class="title">Spoon-music 管理员登录</span>
+      <br />
       <el-form label-width="30px" router>
-        <el-form-item  prop="username">
-            <el-input 
-              prefix-icon="el-icon-user" 
-              placeholder = "用户名" 
-              style="width: 400px;" 
-              v-model="loginForm.username">
-            </el-input>
+        <el-form-item prop="username">
+          <el-input
+            prefix-icon="el-icon-user"
+            placeholder="用户名"
+            style="width: 400px"
+            v-model="loginForm.username"
+          >
+          </el-input>
         </el-form-item>
-        <el-form-item  prop="password">
-            <el-input 
-              prefix-icon="el-icon-lock" 
-              type = "password" 
-              placeholder = "密码" 
-              @keyup.enter.native="login" 
-              style="width: 400px;" 
-              v-model="loginForm.password">
-            </el-input>
+        <el-form-item prop="password">
+          <el-input
+            prefix-icon="el-icon-lock"
+            type="password"
+            placeholder="密码"
+            @keyup.enter.native="login"
+            style="width: 400px"
+            v-model="loginForm.password"
+          >
+          </el-input>
         </el-form-item>
-        <el-form-item style="padding-left:50px;">
-            <el-button 
-              type = "primary" 
-              @click = "login()" 
-              style="width: 300px;"
-              >登录
-            </el-button>
+        <el-form-item style="padding-left: 50px">
+          <el-button type="primary" @click="login()" style="width: 300px"
+            >登录
+          </el-button>
         </el-form-item>
       </el-form>
     </el-card>
-    <img src="../assets/img/guitar.jpg" alt="" class="background-image">
+    <img src="../assets/img/background.jpg" alt="" class="background-image" />
+    <span class="copyright"
+      >© Copyright 2024 Created By Han Shoukun and Wu Yuhuai
+    </span>
   </div>
 </template>
 <script>
-import axios from "@/utils/axios"
+import axios from "@/utils/axios";
 export default {
   data() {
     return {
       loginForm: {
-        username: '',
-        password: ''
-      }
-    }
+        username: "",
+        password: "",
+      },
+    };
   },
   methods: {
     async login() {
-      await axios.post("/admin/login", this.loginForm).then(res => {
+      await axios.post("/admin/login", this.loginForm).then((res) => {
         if (res.data.code === 0) {
           this.$store.commit("setToken", res.data.data);
           this.$message.success("登录成功");
-          this.$router.push('/home');
+          this.$router.push("/home");
         } else {
           this.$message.error("服务错误");
         }
-      })
-    }
-  }
-}
+      });
+    },
+  },
+};
 </script>
 
 <style>
-  .box-card {
-    height: 610px;
-    width: 500px;
-    margin-top: 130px;
-    margin-left: calc(80% - 250px);
-    padding-top: 20px;
-    opacity: 1;
-  }
-  .title {
-      display: block;
-      margin: 0 auto;
-      font-size: 40px;
-      text-align: center;
-  }
-  .background-image {
-    position: absolute; /* 设置绝对定位 */
-    top: 70px;
-    left: 0;
-    width: 100%;
-    height: 85%;
-    z-index: -1; /* 将图片放到最底层，不会覆盖原来的内容 */
-    opacity: 1; /* 可以根据需要调整透明度 */
-  } 
+.box-card {
+  height: 600px;
+  width: 500px;
+  margin-top: 130px;
+  margin-left: calc(50% - 250px);
+  padding-top: 20px;
+  opacity: 1;
+}
+.title {
+  display: block;
+  margin: 0 auto;
+  font-size: 40px;
+  text-align: center;
+}
+.background-image {
+  position: absolute; /* 设置绝对定位 */
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: 85%;
+  z-index: -1; /* 将图片放到最底层，不会覆盖原来的内容 */
+  opacity: 1; /* 可以根据需要调整透明度 */
+}
+.copyright {
+  position: absolute;
+  top: 95%;
+  width: 500px;
+  height: 27px;
+  margin-left: calc(50% - 245px);
+}
 </style>

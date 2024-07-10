@@ -4,45 +4,45 @@
       <div class="box1">
         <i class="el-icon-user"></i>
         <div>
-          <strong>{{usernumber}}</strong>
-          <br>
+          <strong>{{ usernumber }}</strong>
+          <br />
           用户总数
         </div>
       </div>
       <div class="box1">
         <i class="el-icon-mic"></i>
         <div>
-          <strong>{{songnumber}}</strong>
-          <br>
+          <strong>{{ songnumber }}</strong>
+          <br />
           歌曲总数
         </div>
       </div>
       <div class="box1">
-        <i class="el-icon-service"></i>
+        <i class="el-icon-headset"></i>
         <div>
-          <strong>{{singernumber}}</strong>
-          <br>
+          <strong>{{ singernumber }}</strong>
+          <br />
           歌手总数
         </div>
       </div>
       <div class="box1">
         <i class="el-icon-monitor"></i>
         <div>
-          <strong>{{0}}</strong>
-          <br>
+          <strong>{{ 0 }}</strong>
+          <br />
           视频总数
         </div>
       </div>
     </div>
     <div class="chart">
-      <div class="box2" id="main">
-       <HistogramIndex_2 :data="singersonglist"></HistogramIndex_2>
+      <div class="box2">
+        <div id="his"></div>
       </div>
       <div class="box2">
-        <PieIndex_2 :data="singersexlist"></PieIndex_2>
+        <div id="pie2"></div>
       </div>
       <div class="box2">
-        <histogram-index :data="collectonsongslist"></histogram-index>
+        <div id="ma"></div>
       </div>
       <div class="box2">
         <PieIndex :data="usersexlist"></PieIndex>
@@ -52,91 +52,209 @@
 </template>
 
 <script>
-
-import axios from "@/utils/axios"
-import HistogramIndex  from '@/components/HistogramIndex.vue';
-import HistogramIndex_2 from '@/components/HistogramIndex_2.vue';
-import PieIndex from '@/components/PieIndex.vue';
-import PieIndex_2 from '@/components/PieIndex_2.vue';
+import * as echarts from "echarts";
+import axios from "@/utils/axios";
+import PieIndex from "@/components/PieIndex.vue";
 export default {
-  components:{
-    HistogramIndex,
-    HistogramIndex_2,
+  components: {
     PieIndex,
-    PieIndex_2
   },
-  
+
   data() {
     return {
-      usernumber: '1',
-      songnumber: '1',
-      singernumber: '1',
-      mvnumber: '1',
-      usersexlist:{'man':20,'female':10},
-      singersexlist:{'man':30,'female':10},
-      singersonglist:{'周杰伦':20,'林俊杰':10,'蔡依林':15,'陶喆':5},
-      collectonsongslist:{'晴天':100,'七里香':80,'青花瓷':50,'以父之名':30,'倒带':25,'曹操':10}
+      usernumber: "1",
+      songnumber: "1",
+      singernumber: "1",
+      mvnumber: "1",
+      usersexlist: { man: 20, female: 10 },
+      singersexlist: [],
+      singersonglist: [],
+      collectonsongslist: [],
     };
   },
   methods: {
+    async countSex() {
+      await axios.get("/admin/sexRatio").then((res) => {
+        if (res.data.code === 0) {
+          this.singersexlist = res.data.data;
+          let len = this.singersexlist.length;
+          for (var i = 0; i < len; i++) {
+            if (this.singersexlist[i].sex == 1) {
+              this.singersexlist[i].sex = "男";
+            } else if (this.singersexlist[i].sex == 2) {
+              this.singersexlist[i].sex = "女";
+            }
+          }
+        }
+      });
+    },
+    async singerSong() {
+      await axios.get("/admin/singerSong").then((res) => {
+        if (res.data.code === 0) {
+          this.singersonglist = res.data.data;
+        }
+      });
+    },
+    async songStar() {
+      await axios.get("/admin/countStar").then((res) => {
+        if (res.data.code === 0) {
+          this.collectonsongslist = res.data.data;
+        }
+      });
+    },
     countUser() {
-      axios.get("/admin/countUser").then(res => {
+      axios.get("/admin/countUser").then((res) => {
         if (res.data.code === 0) {
           this.usernumber = res.data.data;
         }
-      })
+      });
     },
     countSinger() {
-      axios.get("/admin/countSinger").then(res => {
+      axios.get("/admin/countSinger").then((res) => {
         if (res.data.code === 0) {
           this.singernumber = res.data.data;
         }
-      })
+      });
     },
     countSong() {
-      axios.get("/admin/countSong").then(res => {
+      axios.get("/admin/countSong").then((res) => {
         if (res.data.code === 0) {
           this.songnumber = res.data.data;
         }
-      })
+      });
+    },
+    initPie2() {
+      var myChart = echarts.init(document.getElementById("pie2"));
+      myChart.setOption({
+        title: {
+          text: "歌手性别比",
+          x: "center",
+        },
+        tooltip: {
+          trigger: "item",
+        },
+        legend: {
+          orient: "vertical",
+          left: "left",
+        },
+        series: [
+          {
+            type: "pie",
+            data: this.singersexlist.map((item) => ({
+              value: item.cnt,
+              name: item.sex,
+            })),
+            radius: "50%",
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: "rgba(0,0,0,0.5)",
+              },
+            },
+          },
+        ],
+      });
+    },
+    inithi2() {
+      const keys = this.singersonglist.map((item) => item.singerName);
+      const values = this.singersonglist.map((item) => item.cnt);
+      var myChart = echarts.init(document.getElementById("his"));
+      myChart.setOption({
+        title: {
+          text: "歌手歌曲数",
+          x: "center",
+        },
+        tooltip: {},
+        xAxis: {
+          type: "category",
+          data: keys,
+        },
+        yAxis: {},
+        series: [
+          {
+            name: "数量",
+            type: "bar",
+            data: values,
+          },
+        ],
+      });
+    },
+    inithi1() {
+      const keys = this.collectonsongslist.map((item) => item.songName);
+      const values = this.collectonsongslist.map((item) => item.cnt);
+      var myChart = echarts.init(document.getElementById("ma"));
+      myChart.setOption({
+        title: {
+          text: "歌曲收藏榜",
+        },
+        tooltip: {},
+        xAxis: {
+          data: keys,
+        },
+        yAxis: {},
+        series: [
+          {
+            name: "数量",
+            type: "bar",
+            data: values,
+          },
+        ],
+      });
     },
   },
-  created() {
+  async created() {
     this.countUser();
     this.countSinger();
     this.countSong();
-  }
-}
-
+    await this.countSex();
+    await this.singerSong();
+    await this.songStar();
+    this.initPie2();
+    this.inithi2();
+    this.inithi1();
+  },
+};
 </script>
 
 
 <style scoped>
-.data{
+#ma {
+  width: 600px;
+  height: 300px;
+}
+#his {
+  width: 600px;
+  height: 300px;
+}
+#pie2 {
+  width: 600px;
+  height: 300px;
+}
+.data {
   display: flex;
   justify-content: space-between;
-  padding: 0 60px
+  padding: 0 60px;
 }
-i{
+i {
   font-size: 50px;
   margin-right: 50px;
 }
-.box1{
+.box1 {
   display: flex;
-  border: 1px solid black; 
+  border: 1px solid black;
   padding: 20px;
 }
-.chart{
+.chart {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   margin-top: 30px;
 }
-.box2{
+.box2 {
   margin-bottom: 30px;
   width: 600px;
   height: 300px;
-  border: 1px solid black; 
-
+  border: 1px solid black;
 }
 </style>

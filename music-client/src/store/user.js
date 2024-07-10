@@ -4,7 +4,6 @@ const user = {
         userId: 0,
         username: "",
         user: {},
-        //token: "",
         starList: [],
         avatar: "",
     },
@@ -15,16 +14,14 @@ const user = {
         user: state => state.user,
         starList: state => state.starList,
         avatar: state => state.avatar,
-        //token: state => state.token
     },
     mutations: {
-        setAvatar: (state, avatar) => {state.avatar = avatar},
-        setIsLogin: (state, isLogin) => {state.isLogin = isLogin},
-        setUserId: (state, userId) => {state.userId = userId},
-        setUsername: (state, username) => {state.username = username},
-        setUser: (state, user) => {state.user = user},
-        setStarList: (state, starList) => {state.starList = starList},
-       // setToken: (state, token) => {state.token = token}
+        setAvatar: (state, avatar) => { state.avatar = avatar },
+        setIsLogin: (state, isLogin) => { state.isLogin = isLogin },
+        setUserId: (state, userId) => { state.userId = userId },
+        setUsername: (state, username) => { state.username = username },
+        setUser: (state, user) => { state.user = user },
+        setStarList: (state, starList) => { state.starList = starList },
     }
 }
 

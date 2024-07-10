@@ -1,8 +1,6 @@
 package cn.edu.usts.cs2022.controller.admin;
 
-import cn.edu.usts.cs2022.pojo.dto.LoginDTO;
-import cn.edu.usts.cs2022.pojo.dto.SingerDTO;
-import cn.edu.usts.cs2022.pojo.dto.SongDTO;
+import cn.edu.usts.cs2022.pojo.dto.*;
 import cn.edu.usts.cs2022.pojo.po.*;
 import cn.edu.usts.cs2022.service.*;
 import cn.edu.usts.cs2022.utils.JwtUtil;
@@ -109,9 +107,23 @@ public class AdminController {
         return Result.success(cnt);
     }
 
-    @GetMapping("/countStar/{id}")
-    public Result<Integer> countStar(@PathVariable("id") Integer id) {
-        Integer cnt = starService.countStar(id);
-        return Result.success(cnt);
+    @GetMapping("/countStar")
+    public Result<List<SongStarDTO>> countStar() {
+        List<SongStarDTO> songStarDTOList = starService.countStar();
+        return Result.success(songStarDTOList);
     }
+
+    @GetMapping("/sexRatio")
+    public Result<List<SexDTO>> countSex() {
+        List<SexDTO> sexDTOList = singerService.countSex();
+        System.out.println(sexDTOList);
+        return Result.success(sexDTOList);
+    }
+
+    @GetMapping("/singerSong")
+    public Result<List<SingerSongDTO>> singerSong() {
+        List<SingerSongDTO> singerSongDTOList = songService.singerSong();
+        return Result.success(singerSongDTOList);
+    }
+
 }

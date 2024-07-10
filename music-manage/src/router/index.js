@@ -9,10 +9,6 @@ import home from '@/views/HomeIndex.vue'
 import sinsong from '@/views/SinMusicIndex.vue'
 import addsinger from '@/views/AddSingerIndex.vue'
 
-
-
-
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,7 +28,6 @@ const routes = [
       {path: '/user', component: user},
       {path: '/sinsong/:id', component: sinsong},
       {path: '/addsinger',component: addsinger}
-
     ]
   }
  

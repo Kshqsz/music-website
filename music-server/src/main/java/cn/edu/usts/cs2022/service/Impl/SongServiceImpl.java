@@ -1,11 +1,14 @@
 package cn.edu.usts.cs2022.service.Impl;
 
 import cn.edu.usts.cs2022.mapper.SongMapper;
+import cn.edu.usts.cs2022.mapper.StarMapper;
+import cn.edu.usts.cs2022.pojo.dto.SingerSongDTO;
 import cn.edu.usts.cs2022.pojo.dto.SongDTO;
 import cn.edu.usts.cs2022.pojo.po.Song;
 import cn.edu.usts.cs2022.service.SongService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,6 +17,8 @@ import java.util.List;
 public class SongServiceImpl implements SongService {
 
     public final SongMapper songMapper;
+    private final StarMapper starMapper;
+
     /**
      * 根据关键词查找歌曲
      * @param keyword
@@ -58,8 +63,10 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    @Transactional
     public void deleteSong(Integer id) {
         songMapper.deleteById(id);
+        starMapper.deleteSong(id);
     }
 
     @Override
@@ -76,5 +83,10 @@ public class SongServiceImpl implements SongService {
     @Override
     public Integer countSong() {
         return songMapper.countSong();
+    }
+
+    @Override
+    public List<SingerSongDTO> singerSong() {
+        return songMapper.singerSong();
     }
 }
